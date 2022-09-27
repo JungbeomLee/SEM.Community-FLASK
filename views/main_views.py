@@ -40,12 +40,12 @@ def register() :
 
   if request.method == 'POST' and 'userid' in request.form and 'username' in request.form and 'email' in request.form and 'password' in request.form and 'profile' in request.form and 're_password' in request.form:
     
-    id = request.form['userid']
-    name = request.form['username']
+    user_id = request.form['userid']
+    user_name = request.form['username']
     email = request.form['email'].lower()
     password = request.form['password']
     re_password = request.form['re_password']
-    profile = request.form['profile']
+    user_profile = request.form['profile']
     
     cursor.execute("SELECT email FROM users WHERE email=% s", email)
     email_compare = cursor.fetchone()
@@ -66,9 +66,10 @@ def register() :
       register_db.commit()
       flash('Sign up Completed!')
       
-      del password, id, name, email, re_password, profile, email_compare
+      del password, user_id, user_name, email, re_password, user_profile, email_compare
 
       return render_template('index.html')
       
       
   return render_template('register.html')
+
