@@ -1,3 +1,11 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,5 +19,8 @@
 </head>
 <body>
     <h1>WELLCOME</h1>
+    <button type="button" onclick="location.href='/register' ">회원가입</button>
+    <button type="button" onclick="location.href='/login' ">로그인</button>
+    <button type="button" onclick="location.href='/cookie' ">유저</button>
 </body>
 </html>
