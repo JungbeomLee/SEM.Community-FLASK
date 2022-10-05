@@ -5,7 +5,7 @@ import pymysql
 import bcrypt
 
 
-bp = Blueprint('register', __name__, url_prefix='/')
+bp = Blueprint('flask_register', __name__, url_prefix='/')
 
 load_dotenv()
 
@@ -40,10 +40,10 @@ def register() :
     # already signed email check code & unmatch password check
     if(email_compare) :
       flash('Already Signed up Email')
-      return redirect(url_for('register.register'))
+      return redirect(url_for('flask_register.register'))
     elif(password != re_password) :
       flash('Unmatch password!')
-      return redirect(url_for('register.register'))
+      return redirect(url_for('flask_register.register'))
     else :
       password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
       cursor.execute('INSERT INTO users (name, email, password, profile) VALUES (% s, % s, % s, % s)', (user_name, useremail, password, user_profile))
@@ -51,7 +51,7 @@ def register() :
 
       flash('Sign up Completed!')
 
-      return redirect(url_for('main.main_page'))
+      return redirect(url_for('flask_main.main_page'))
       
   return render_template('register.html')
 

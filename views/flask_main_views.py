@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-bp = Blueprint('main', __name__, url_prefix='/')
+bp = Blueprint('flask_main', __name__, url_prefix='/')
 
 # custom error page
 @bp.app_errorhandler(404)

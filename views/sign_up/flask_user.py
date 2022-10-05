@@ -1,21 +1,14 @@
-from flask import Blueprint, make_response
-from flask_jwt_extended import (JWTManager, get_jwt_identity, jwt_required)
+from pickle import TRUE
+from flask import Blueprint, request
+from ..check_token import CHECK_TOKEN
+import sys
 
-bp = Blueprint('user', __name__, url_prefix='/')
-jwt = JWTManager()
-
-# jwt_required() error page
-def unauthorized_response():
-    return make_response("there is no access token", 401)
-
-# catch jwt_required() error
-@jwt.unauthorized_loader
-def unauthorized_callback(callback):
-    return unauthorized_response()
+bp = Blueprint('flask_user', __name__, url_prefix='/')
 
 @bp.route('/user', methods=['GET'])
-@jwt_required()
-def protected():
+@CHECK_TOKEN.check_for_token
+def user():
+    refresh_token = request.cookies.get('refresh_token_cookie')
     # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
+    current_user = 'hi'
     return current_user
