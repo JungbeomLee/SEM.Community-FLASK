@@ -27,35 +27,46 @@ def user() :
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
 
+    # create user_data dict variable
+    # get user_data
     cursor.execute("SELECT name FROM users WHERE email=%s", decode_user_token_email)
     user_name = cursor.fetchone()['name']
     cursor.execute("SELECT profile FROM users WHERE email=%s", decode_user_token_email)
     user_profile = cursor.fetchone()['profile']
     cursor.execute("SELECT created_at FROM users WHERE email=%s", decode_user_token_email)
     user_created_at = cursor.fetchone()['created_at']
-
+    # create user_data dict
     user_data = {'user_name' : user_name, 'user_profile' : user_profile, 'user_created_at' : user_created_at}
 
-    if request.method == 'POST' and 'password' in request.form or 'change_password' in request.form :
+    # change password or profile POST
+    if request.method == 'POST' and 'password' in request.form or 'change_password' in request.form or 'change_profile' in request.form:
+
+        # checkout password
         if request.method == 'POST' and 'password' in request.form :
             password = str(request.form['password'])
 
             cursor.execute("SELECT password FROM users WHERE email=%s", decode_user_token_email)
             match_pwd = cursor.fetchone()
             check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])
+
+            # if password same
             if(check_password == True) :
                 register_db.close()
+                flash('Comnfirmed password!')
                 return render_template('user.html', pwd_check = True, user_data = user_data)
             else :
                 flash('Unmatch password!')
                 return redirect(url_for('flask_user.user'))
 
+        # if get POST change_password
         if request.method == 'POST' and 'change_password' in request.form :
             change_password = str(request.form['change_password'])
 
             cursor.execute("SELECT password FROM users WHERE email=%s", decode_user_token_email)
             match_pwd = cursor.fetchone()
             check_password = bcrypt.checkpw(change_password.encode('utf-8'), match_pwd['password'])
+
+            # if new_password == old_password
             if(check_password == True) :
                 flash('Already using password!')
                 return redirect(url_for('flask_user.user'))
@@ -67,5 +78,18 @@ def user() :
 
                 flash('Password Change Completed!')
                 return redirect(url_for('flask_user.user'))
+
+        # if get POST change_profile
+        if request.method == 'POST' and 'change_profile' in request.form :
+            change_profile = str(request.form['change_profile'])
+            print(change_profile)
+
+            cursor.execute("UPDATE users SET profile=%s WHERE email=%s", (change_profile, decode_user_token_email))
+            register_db.commit()
+            register_db.close()
+
+            flash('Profile Change Completed!')
+            return redirect(url_for('flask_user.user'))
+
     else :
         return render_template('user.html', user_data = user_data)

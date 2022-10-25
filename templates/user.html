@@ -18,33 +18,38 @@
     <h1>USER PROFILE</h1>
 
     {% if pwd_check %}
-        {% if user_data%}
-            <div>name : {{ user_data['user_name'] }}</div>
-            <div>profile : {{ user_data['user_profile'] }}</div>
-            <div>created_at : {{ user_data['user_created_at'] }}</div>
-        {% endif %}
+        <div>name : {{ user_data['user_name'] }}</div>
         <form method="POST" action="http://localhost:8000/user" >
-            <div class="form-group">
-                <label for="change_password">비밀번호 변경</label>
-                <input type="password" class="form-control" id="change_password" placeholder="비밀번호" name="change_password" required/>
-            </div>
-            <button type="submit" class="btn btn-primary" >확인</button>
-            <button type="submit" class="btn btn-primary" >계정 탈퇴</button>   
+            <span class="form-group">
+                <label for="change_profile">profile change</label>
+                <input type="text" class="form-control" id="change_profile" value="{{ user_data['user_profile'] }}" placeholder="자기소개"  name="change_profile" required/>
+            </span>
+            <button type="submit" class="btn btn-primary" >확인</button> 
         </form>
+
+        <div>created_at : {{ user_data['user_created_at'] }}</div>
+
+        <form method="POST" action="http://localhost:8000/user">
+            <span class="form-group">
+                <label for="change_password">password change</label>
+                <input type="password" class="form-control" id="change_password" placeholder="비밀번호" name="change_password" required/>
+            </span>
+            <button type="submit" class="btn btn-primary" >확인</button> 
+        </form>
+        <button type="submit" class="btn btn-primary" >계정 탈퇴</button>  
     {% else %}
-        {% if user_data%}
-            <div>name : {{ user_data['user_name'] }}</div>
-            <div>profile : {{ user_data['user_profile'] }}</div>
-            <div>created_at : {{ user_data['user_created_at'] }}</div>
-        {% endif %}
+        <div>name : {{ user_data['user_name'] }}</div>
+        <div>profile : {{ user_data['user_profile'] }}</div>
+        <div>created_at : {{ user_data['user_created_at'] }}</div>
+        
         <form method="POST" action="http://localhost:8000/user" >
             <div class="form-group">
-                <label for="password">비밀번호 변경</label>
+                <label for="password">사용자 정보 수정</label>
                 <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password" required/>
             </div>
             <button type="submit" class="btn btn-primary" >확인</button>
-            <button type="submit" class="btn btn-primary" >계정 탈퇴</button>
         </form>
+        <button type="submit" class="btn btn-primary" >계정 탈퇴</button>
     {% endif %}
 
 </body>
