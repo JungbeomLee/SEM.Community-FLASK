@@ -1,0 +1,51 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-profile</title>
+</head>
+<body>
+    <h1>USER PROFILE</h1>
+
+    {% if pwd_check %}
+        {% if user_data%}
+            <div>name : {{ user_data['user_name'] }}</div>
+            <div>profile : {{ user_data['user_profile'] }}</div>
+            <div>created_at : {{ user_data['user_created_at'] }}</div>
+        {% endif %}
+        <form method="POST" action="http://localhost:8000/user" >
+            <div class="form-group">
+                <label for="change_password">비밀번호 변경</label>
+                <input type="password" class="form-control" id="change_password" placeholder="비밀번호" name="change_password" required/>
+            </div>
+            <button type="submit" class="btn btn-primary" >확인</button>
+            <button type="submit" class="btn btn-primary" >계정 탈퇴</button>   
+        </form>
+    {% else %}
+        {% if user_data%}
+            <div>name : {{ user_data['user_name'] }}</div>
+            <div>profile : {{ user_data['user_profile'] }}</div>
+            <div>created_at : {{ user_data['user_created_at'] }}</div>
+        {% endif %}
+        <form method="POST" action="http://localhost:8000/user" >
+            <div class="form-group">
+                <label for="password">비밀번호 변경</label>
+                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password" required/>
+            </div>
+            <button type="submit" class="btn btn-primary" >확인</button>
+            <button type="submit" class="btn btn-primary" >계정 탈퇴</button>
+        </form>
+    {% endif %}
+
+</body>
+</html>
