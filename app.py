@@ -13,12 +13,18 @@ def create_app() :
     from views import flask_main_views
     app.register_blueprint(flask_main_views.bp)
 
-    from views import flask_token, flask_user
-    from views.sign_up import flask_login, flask_register
+    from views import flask_token
+    from views.sign_up import flask_login, flask_register, flask_logout
+    from views.user import flask_delete_account, flask_user_change_pwd, flask_other_user, flask_own_user
+
     app.register_blueprint(flask_register.bp)
     app.register_blueprint(flask_login.bp)
     app.register_blueprint(flask_token.bp)
-    app.register_blueprint(flask_user.bp)
+    app.register_blueprint(flask_own_user.bp)
+    app.register_blueprint(flask_delete_account.bp)
+    app.register_blueprint(flask_user_change_pwd.bp)
+    app.register_blueprint(flask_logout.bp)
+    app.register_blueprint(flask_other_user.bp)
 
     app.run(host='0.0.0.0', port=8000, debug=True)
 

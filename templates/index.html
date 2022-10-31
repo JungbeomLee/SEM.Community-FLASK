@@ -1,11 +1,3 @@
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <script>
-            alert("{{messages[-1]}}")
-        </script>
-    {% endif %}
-{% endwith %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +7,22 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>WELCOME</h1>
+    <h1>WELCOME </h1>
     <button type="button" onclick="location.href='/register' ">회원가입</button>
-    <button type="button" onclick="location.href='/login' ">로그인</button>
+    {% if login_status == True%}
+        <button type="button" onclick="location.href='/logout' ">로그아웃</button>
+    {% else %}
+        <button type="button" onclick="location.href='/login' ">로그인</button>
+    {% endif %}
     <button type="button" onclick="location.href='/token' ">토큰</button>
-    <button type="button" onclick="location.href='/user' ">유저</button>
+    <button type="button" onclick="location.href='/user/own_user' ">유저</button>
 </body>
 </html>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}

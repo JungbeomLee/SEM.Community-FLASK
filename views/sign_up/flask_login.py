@@ -1,4 +1,4 @@
-from flask import (Blueprint, render_template, request, flash, redirect, url_for, render_template, make_response)
+from flask import (Blueprint, render_template, request, flash, redirect, url_for, render_template, make_response, session)
 from ..utils.env_var import jwt_secret_key, jwt_access_token_expires, jwt_refresh_token_expires, database_pwd
 import pymysql
 import jwt
@@ -32,7 +32,6 @@ def login() :
     if(match_pwd) : 
         check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])
         if(check_password==True) :
-            flash('Login Successfuly')
             register_db.close()
 
             # create access/refresh token
@@ -44,11 +43,15 @@ def login() :
               'user_email' : useremail,
               'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=jwt_refresh_token_expires)
             }, jwt_secret_key, algorithm='HS256')
+            
+            # set session
+            session['user_email'] = useremail
 
             # set cookies
             reps = make_response(redirect(url_for('flask_main.main_page')))
             reps.set_cookie('access_token', access_token)
             reps.set_cookie('refresh_token', refresh_token)
+            flash('Login Successfuly')
             return reps
         else : 
             flash('Failed to Login')
