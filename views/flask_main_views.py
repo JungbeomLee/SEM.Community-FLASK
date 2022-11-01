@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, make_response, request, session
-from .utils.check_token import CHECK_TOKEN
+from urllib import parse
 import datetime
 
 bp = Blueprint('flask_main', __name__, url_prefix='/')
@@ -18,7 +18,8 @@ def main_page() :
 
   if not get_first_meet : 
     first_meet = make_response(render_template('index.html'))
-    first_meet.set_cookie('first_meet', 'hi this is when we meet first time!. Maybe...'+str(datetime.datetime.utcnow()))
+    first_meet_cookie_content =  parse.quote('hi this is when we meet first time!. Maybe...'+str(datetime.datetime.utcnow()))
+    first_meet.set_cookie('first_meet', first_meet_cookie_content)
     return first_meet
 
   if 'user_email' in session :

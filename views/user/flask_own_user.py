@@ -45,7 +45,7 @@ def user() :
         # checkout password
         if request.method == 'POST' and 'password' in request.form :
             password = str(request.form['password'])
-
+            
             cursor.execute("SELECT password FROM users WHERE email=%s", decode_user_token_email)
             match_pwd = cursor.fetchone()
             check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])

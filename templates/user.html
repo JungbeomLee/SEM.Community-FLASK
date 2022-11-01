@@ -19,7 +19,7 @@
 
     {% if pwd_check %}
         <div>name : {{ user_data['user_name'] }}</div>
-        <form method="POST" action="http://localhost:8000/user" >
+        <form method="POST" action="http://localhost:8000/user/own_user" >
             <span class="form-group">
                 <label for="change_profile">profile change</label>
                 <input type="text" class="form-control" id="change_profile" value="{{ user_data['user_profile'] }}" placeholder="자기소개"  name="change_profile" required/>
@@ -29,11 +29,11 @@
 
         <div>created_at : {{ user_data['user_created_at'] }}</div>
 
-        <form method="POST" action="http://localhost:8000/user">
+        <form method="POST" action="http://localhost:8000/user/own_user">
             <input type="button" value="change_password" onClick="location.href='/user/delete_account'" name="delect_password" >비밀번호 변경</input> 
         </form>
 
-        <form method="POST" action="http://localhost:8000/user">
+        <form method="POST" action="http://localhost:8000/user/own_user">
             <input type="button" value="delete_user" onClick="location.href='/user/delete_account'" name="delect_password" >계정 탈퇴</input> 
         </form>
 
@@ -42,7 +42,7 @@
         <div>profile : {{ user_data['user_profile'] }}</div>
         <div>created_at : {{ user_data['user_created_at'] }}</div>
 
-        <form method="POST" action="http://localhost:8000/user" >
+        <form method="POST" action="http://localhost:8000/user/own_user" >
             <div class="form-group">
                 <label for="password">사용자 정보 수정</label>
                 <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password" required/>

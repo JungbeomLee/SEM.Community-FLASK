@@ -1,9 +1,7 @@
-from flask import Blueprint, render_template, request, flash, url_for, redirect
+from flask import Blueprint, render_template, request
 from ..utils.check_token import CHECK_TOKEN
 from dotenv import load_dotenv
-from ..utils.env_var import database_pwd, jwt_secret_key
-import bcrypt
-import jwt
+from ..utils.env_var import database_pwd
 import pymysql
 
 load_dotenv('../env')
@@ -11,8 +9,7 @@ load_dotenv('../env')
 bp = Blueprint('flask_other_user', __name__, url_prefix='/')
 
 @bp.route('/user/<route_user_nickname>', methods=['GET','POST'])
-@CHECK_TOKEN.check_for_token
-def user(route_user_nickname) :
+def other_user(route_user_nickname) :
     # connect mysql database
     register_db = pymysql.connect(
         host=   "localhost",
@@ -23,7 +20,7 @@ def user(route_user_nickname) :
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
     
-    # 입력받은 user_name이 실제 가입 유저인지 확인
+    # 입력받은 route_user_nickname이 실제 가입 유저인지 확인
     cursor.execute("SELECT name FROM users WHERE name=%s", route_user_nickname)
     try : 
         check_route_user_nickname = cursor.fetchone()['name']
