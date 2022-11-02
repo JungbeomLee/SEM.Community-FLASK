@@ -1,5 +1,4 @@
-from flask import (Blueprint, flash, make_response, redirect, url_for, render_template, session)
-from ..utils.env_var import jwt_secret_key, jwt_access_token_expires, jwt_refresh_token_expires, database_pwd
+from flask import (Blueprint, flash, make_response, redirect, url_for, session)
 from ..utils.check_token import CHECK_TOKEN
 
 bp = Blueprint('flask_logout', __name__, url_prefix='/')

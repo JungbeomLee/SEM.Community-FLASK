@@ -18,12 +18,16 @@
     </form>
 
     <h3>유저 목록</h3>
-    {% for i in search_user_name %}
-        <div>
-            <button>
-                <option onClick="location.href='/user/{{ i }}'">{{ i }}</option>
-            </button>
-        </div>
-    {% endfor %}
+    {% if search_result == True %}
+        {% for i in search_user_name_list %}
+            <div>
+                <button>
+                    <option onClick="location.href='/user/{{ i }}'">{{ i }}</option>
+                </button>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h4>검색결과 없음</h4>
+    {% endif %}
 </body>
 </html>

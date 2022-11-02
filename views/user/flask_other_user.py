@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request
-from ..utils.check_token import CHECK_TOKEN
 from dotenv import load_dotenv
 from ..utils.env_var import database_pwd
 import pymysql
