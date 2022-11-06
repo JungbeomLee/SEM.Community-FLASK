@@ -67,7 +67,6 @@ def login() :
   else :
     return render_template('login.html')
 
-
 @bp.route('/login/post', methods=['POST'])
 def login_post() :
   if request.method == 'POST':
@@ -75,6 +74,38 @@ def login_post() :
     useremail = request.form['useremail']
     password = str(request.form['password'])
 
-    user_data = {'useremail' : useremail, 'password' : password}
+    # connect mysql DataBase
+    register_db = pymysql.connect(
+          host=   "localhost",
+          user=   "root", 
+          passwd= database_pwd, 
+          db=     "register_db", 
+          charset="utf8"
+    )
+    cursor = register_db.cursor(pymysql.cursors.DictCursor)
 
-    return jsonify(user_data)
+    # 입력받은 비번과 DB에 있는 비번 일치 검사
+    cursor.execute("SELECT password FROM users WHERE email=% s", useremail)
+    match_pwd = cursor.fetchone()
+    
+    if(match_pwd) : 
+        check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])
+        if(check_password==True) :
+            register_db.close()
+
+            # set session
+            session['user_email'] = useremail
+
+            # create access/refresh token
+            access_token = jwt.encode({
+              'user_email' : useremail,
+              'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=jwt_access_token_expires)
+            }, jwt_secret_key, algorithm='HS256')
+            refresh_token = jwt.encode({
+              'user_email' : useremail,
+              'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=jwt_refresh_token_expires)
+            }, jwt_secret_key, algorithm='HS256')
+
+            # set cookies
+            reps = {'login' : True, 'access_token' : access_token, 'refresh_token' : refresh_token}
+            return reps

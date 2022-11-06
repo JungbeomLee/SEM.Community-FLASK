@@ -14,7 +14,14 @@ function userLoginDataPost(loginId, password) {
         .then(res => res.json())
         .then(data => {
             console.log(data['useremail'])
-            document.getElementById('title').innerText = data['useremail']
+            if(data['login'] == true) {
+                document.cookie = "access_token="+data["access_token"]
+                document.cookie = "refresh_token="+data["refresh_token"]
+                location.href='/'
+                alert('Success to login')
+            }else{
+                alert('Failed to login')
+            }
         })
 }
 
