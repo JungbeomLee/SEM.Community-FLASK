@@ -1,23 +1,30 @@
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <script>
-            alert("{{messages[-1]}}")
-        </script>
-    {% endif %}
+{% if messages %}
+<script>
+    alert("{{messages[-1]}}")
+</script>
+{% endif %}
 {% endwith %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>user-profile</title>
 </head>
+
 <body>
     <h1>USER {{ other_user_name }} PROFILE</h1>
     <div>name : {{ other_user_data['user_name'] }}</div>
+    <div>name : {{ other_user_data['user_nickname'] }}</div>
     <div>profile : {{ other_user_data['user_profile'] }}</div>
     <div>created_at : {{ other_user_data['user_created_at'] }}</div>
 </body>
+
 </html>

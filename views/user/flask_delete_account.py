@@ -1,12 +1,9 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
 from ..utils.check_token import CHECK_TOKEN
-from dotenv import load_dotenv
 from ..utils.env_var import database_pwd, jwt_secret_key
 import bcrypt
 import jwt
 import pymysql
-
-load_dotenv('../env')
 
 bp = Blueprint('flask_delete_account', __name__, url_prefix='/user')
 

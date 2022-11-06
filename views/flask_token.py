@@ -10,4 +10,5 @@ bp = Blueprint('flask_token', __name__, url_prefix='/')
 def token():
     refresh_token = request.cookies.get('refresh_token')
     decode_refresh_token_email = jwt.decode(refresh_token, jwt_secret_key, algorithms='HS256')['user_email']
+    
     return decode_refresh_token_email

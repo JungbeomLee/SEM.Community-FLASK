@@ -24,5 +24,5 @@ def main_page() :
 
   if 'user_email' in session :
     login_status = True
-
+    
   return render_template('index.html', login_status = login_status)

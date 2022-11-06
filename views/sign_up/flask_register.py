@@ -10,13 +10,14 @@ bp = Blueprint('flask_register', __name__, url_prefix='/')
 @bp.route('/register', methods=['GET','POST'])
 def register() :
 
-  if request.method == 'POST' and 'username' in request.form and 'useremail' in request.form and 'password' in request.form and 'profile' in request.form and 're_password' in request.form:
+  if request.method == 'POST' and 'username' in request.form and 'useremail' in request.form and 'usernickname' in request.form and 'password' in request.form and 'profile' in request.form and 're_password' in request.form:
 
     user_name = request.form['username']
     useremail = request.form['useremail'].lower()
     password = request.form['password']
     re_password = request.form['re_password']
     user_profile = request.form['profile']
+    user_nickname = request.form['usernickname']
 
     # connect mysql DataBase
     register_db = pymysql.connect(
@@ -46,7 +47,7 @@ def register() :
       flash('Signing up for membership')
       password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
 
-      cursor.execute('INSERT INTO users (name, email, password, profile) VALUES (% s, % s, % s, % s)', (user_name, useremail, password, user_profile))
+      cursor.execute('INSERT INTO users (name, nickname, email, password, profile_text) VALUES (% s, %s, % s, % s, % s)', (user_name, user_nickname,useremail, password, user_profile))
       register_db.commit()
       register_db.close()
 
