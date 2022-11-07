@@ -10,7 +10,6 @@ loginSubmit.addEventListener('click', (e) => {
     let rePassword = document.getElementById('re_password').value;
     let profile = document.getElementById('profile').value;
 
-    
     let user_Data = new Object();
 
     user_Data.userName = userName;
