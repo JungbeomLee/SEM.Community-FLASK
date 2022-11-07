@@ -8,6 +8,7 @@ loginSubmit.addEventListener('click', (e) => {
     
     let user_Data = new Object();
 
+    
     user_Data.userEmail = userEmail;
     user_Data.password = password;
 
