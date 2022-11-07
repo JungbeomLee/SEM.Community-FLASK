@@ -1,0 +1,57 @@
+# showpost_list css
+<style>
+        table {
+          border:1px solid;
+          text-align:center;
+          margin: auto;
+        }
+ 
+        table thead tr {
+          background:gray;
+          color:white;
+        }
+
+        table tbody tr:hover {
+          background-color: lightgray;
+          cursor:pointer;
+        }
+
+        td {
+          border:1px solid
+        }
+
+        th {
+          border:1px solid
+        }
+
+        p {
+          margin:auto;
+          margin-top:30px;
+          text-align:center;
+        }
+    </style>
+
+# showpost_list.js
+
+function rowClicked2() {
+ 
+    var table =document.getElementById('showpost_list_table');
+    var rowList = table.rows;
+    
+    for (i=1; i<rowList.length; i++) {//thead부분 제외.
+      
+        var row = rowList[i]; 
+      
+        row.onclick = function(){ 
+            return function(){ 
+            
+            var select_board_number =this.cells[0]; //번호
+         
+            location.href = `/${select_board_number}`
+        };//return
+      }(row);//onclick
+    }//for
+            
+   }//function
+  
+  window.onload = rowClicked2();

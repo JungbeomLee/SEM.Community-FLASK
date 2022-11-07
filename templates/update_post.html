@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for i in update_post %}
+    <div class="container">
+        <form method="POST" action="">
+            <div class="form-group">
+                <label>제목</label>
+                <input type="text" name="update_title" class="form-control" value="{{ i[0] }}"><br>
+                <label>내용</label>
+                <input type="text" name="update_content" class="form-control" value="{{ i[1] }}"><br>
+                <label>카테고리</label>
+                <select name="update_category" value="{{ i[2] }}">
+                    <option>프로젝트</option>
+                    <option>스터디</option>
+                    <option>대회</option>
+                    <option>기타</option>
+                </select> </p>
+                <label>팀 인원제한</label>
+                <input type="number" name="update_max_team" class="form-control" value="{{ i[3] }}"><br>
+                <label>시작일</label>
+                <input type="date" name="update_start_day" class="form-control" value="{{ i[4] }}"><br>
+                <label>연락처</label>
+                <input type="text" name="update_contect" class="form-control" value="{{ i[5] }}"><br>
+                <label>모집기술</label>
+                <input type="text" name="update_tech_stack" class="form-control" value="{{ i[6] }}"><br>
+                <p><input type = "submit" value = "수정"></p>
+            </div>
+        </form>
+    {% endfor %}
+    </div>
+</body>
+</html>

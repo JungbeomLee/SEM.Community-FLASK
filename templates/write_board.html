@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action = "/posting" method = "POST">
+        <p>제목: <input type = "text" name = "title" /></p>
+        <p>내용: <input type = "text" name = "content" /></p>
+        <p>카테고리: 
+        <select name="category">
+            <option>프로젝트</option>
+            <option>스터디</option>
+            <option>대회</option>
+            <option>기타</option>
+        </select> </p>
+        <p>팀 인원제한: <input type = "number" name = "max_team" /></p>
+        <p>프로젝트 시작날: <input type = "date" name = "start_day" /></p>
+        <p>연락처: <input type = "text" name = "contect" /></p>
+        <p>모집 기술: <input type = "text" name = "tech_stack" /></p>
+        <p><input type = "submit" value = "저장"></p>
+     </form>
+</body>
+</html>

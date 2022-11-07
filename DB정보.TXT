@@ -1,0 +1,23 @@
+CREATE TABLE board(
+	board_num INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR(120) NOT NULL,
+	content VARCHAR(3000) NOT NULL,
+	category VARCHAR(20),
+	max_team INT(100),
+	start_day VARCHAR(100) NOT NULL,
+	create_day TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	contect VARCHAR(100) NOT NULL,
+	tech_stack VARCHAR(255),
+	email VARCHAR(255) NOT NULL,
+	PRIMARY KEY (board_num)); 
+
+board_num : 게시글 번호
+title : 제목
+content : 게시글 내용
+category : 프로젝트, 대회, 스터디 등의 모집 이유
+max_team : 모집 인원
+start_day : 프로젝트 시작날
+create_day : 게시글 작성일
+contect : 연락처 ( 이메일, 전화번호 등 )
+tech_stack : 모집하는 기술 ( 파이썬, 자바 구해요 등 ) 
+email : users 테이블의 email과 같음
