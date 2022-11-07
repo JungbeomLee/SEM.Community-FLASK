@@ -14,7 +14,6 @@ db = pymysql.connect(
 
 cursor = db.cursor()
 
-
 @app.route('/', methods=['GET', 'POST'])
 def main():
     return render_template('main.html')
