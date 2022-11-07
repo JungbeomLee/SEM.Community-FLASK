@@ -28,10 +28,10 @@ def login() :
 
     # 입력받은 비번과 DB에 있는 비번 일치 검사
     cursor.execute("SELECT password FROM users WHERE email=% s", useremail)
-    match_pwd = cursor.fetchone()
+    check_signed_email = cursor.fetchone()
     
-    if(match_pwd) : 
-        check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])
+    if(check_signed_email) : 
+        check_password = bcrypt.checkpw(password.encode('utf-8'), check_signed_email['password'])
         if(check_password==True) :
             register_db.close()
             
@@ -86,10 +86,10 @@ def login_post() :
 
     # 입력받은 비번과 DB에 있는 비번 일치 검사
     cursor.execute("SELECT password FROM users WHERE email=% s", useremail)
-    match_pwd = cursor.fetchone()
+    check_signed_email = cursor.fetchone()
     
-    if(match_pwd) : 
-        check_password = bcrypt.checkpw(password.encode('utf-8'), match_pwd['password'])
+    if(check_signed_email) : 
+        check_password = bcrypt.checkpw(password.encode('utf-8'), check_signed_email['password'])
         if(check_password==True) :
             register_db.close()
 
@@ -109,3 +109,9 @@ def login_post() :
             # set cookies
             reps = {'login' : True, 'access_token' : access_token, 'refresh_token' : refresh_token}
             return reps
+        else :
+            reps = {'login' : False}
+            return reps
+    else :
+      reps = {'login' : False}
+      return reps
