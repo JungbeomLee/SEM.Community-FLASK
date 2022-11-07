@@ -3,24 +3,29 @@ loginSubmit.addEventListener('click', (e) => {
     function login() {
         e.preventDefault(); // 기본 폼 동작 막기
 
-    let loginId = document.getElementById('useremail').value;
+    let userEmail = document.getElementById('useremail').value;
     let password = document.getElementById('password').value;
+    
+    let user_Data = new Object();
 
-    userLoginDataPost(loginId, password)
+    user_Data.userEmail = userEmail;
+    user_Data.password = password;
+
+    userLoginDataPost(user_Data);
     };
 
     login();
 });
 
-function userLoginDataPost(loginId, password) {
+function userLoginDataPost(user_Data) {
     let loginData = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: new URLSearchParams({
-            'useremail': loginId,
-            'password': password
+            'useremail': user_Data['userEmail'],
+            'password': user_Data['password']
         }),
         mode: 'no-cors'
     };
@@ -36,4 +41,15 @@ function userLoginDataPost(loginId, password) {
                 alert('Failed to login')
             }
         })
+}
+
+function checkFormInput(user_Data){ 
+    if(user_Data['userEmail'] == ''){
+        alert('Please type your email')
+        throw"stop";
+    }else if(user_Data['password'] == ''){
+        alert('Please type your password')
+        throw"stop";
+    }
+
 }
