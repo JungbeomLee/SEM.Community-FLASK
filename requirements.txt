@@ -1,5 +1,5 @@
 bcrypt==4.0.0
-boto3==1.26.1
+boto3==1.26.1 
 botocore==1.29.1
 certifi @ file:///C:/b/abs_4f5wo627a3/croots/recipe/certifi_1663615677642/work/certifi
 click==8.1.3
