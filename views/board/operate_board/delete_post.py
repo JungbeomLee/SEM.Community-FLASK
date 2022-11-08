@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from views.utils.check_token import CHECK_TOKEN
 import pymysql
 
 bp = Blueprint('delete_post', __name__, url_prefix='/')
-
+#@CHECK_TOKEN
 @bp.route('/delete_post/<delete_board_number>', methods=['GET', 'POST'])
 def delete_post(delete_board_number):
     db = pymysql.connect(

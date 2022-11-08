@@ -17,6 +17,8 @@ def posting():
 
     cursor = db.cursor()
 
+    #Markdown 구현 https://wikidocs.net/81066
+
     if request.method == "POST":
         try:
             title = request.form['title']

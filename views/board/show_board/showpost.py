@@ -15,7 +15,7 @@ def showpost(select_board_number):
     )
     cursor = db.cursor()
 
-    if request.method == "GET":
+    if request.method == "GET": 
         cursor.execute("SELECT * FROM test WHERE board_num = '{}'".format(select_board_number))
         post_content = cursor.fetchall()
         db.close()
