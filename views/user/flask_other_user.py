@@ -4,7 +4,7 @@ import pymysql
 
 bp = Blueprint('flask_other_user', __name__, url_prefix='/user')
 
-@bp.route('/<route_user_nickname>', methods=['GET','POST'])
+@bp.route('/<route_user_nickname>', methods=['GET'])
 def other_user(route_user_nickname) :
     # connect mysql database
     register_db = pymysql.connect(
