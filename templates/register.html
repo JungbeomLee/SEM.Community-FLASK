@@ -27,15 +27,15 @@
         <div class="row mt-5">
             <div class="col-12">
 
-                <form method="POST" action="http://localhost:8000/register">
+                <form>
 
                     <div class="form-group">
                         <label for="username">사용자 이름</label>
                         <input type="text" id="username" placeholder="사용자 이름" name="username" required />
                     </div>
                     <div class="form-group">
-                        <label for="username">닉네임</label>
-                        <input type="text" id="username" placeholder="닉네임" name="usernickname" required />
+                        <label for="usernickname">닉네임</label>
+                        <input type="text" id="usernickname" placeholder="닉네임" name="usernickname" required />
                     </div>
                     <div class="form-group">
                         <label for="useremail">이메일</label>
@@ -54,11 +54,11 @@
                         <label for="profile">자기소개</label>
                         <input type="text" id="profile" placeholder="한줄 자기소개" name="profile" />
                     </div>
-                    <button type="submit">등록</button>
-
+                    <button type="submit" id="login_submit">등록</button>
                 </form>
             </div>
         </div>
 </body>
+<script src="../static/js/register.js"></script>
 
 </html>
