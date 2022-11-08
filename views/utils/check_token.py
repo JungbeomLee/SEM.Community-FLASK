@@ -11,6 +11,7 @@ class CHECK_TOKEN() :
             access_token = request.cookies.get('access_token')
             refresh_token = request.cookies.get('refresh_token')
 
+
             # 쿠키에 토큰이 둘 다 없을 경우
             if(not(access_token or refresh_token)) : 
                 flash('You have to login first!')

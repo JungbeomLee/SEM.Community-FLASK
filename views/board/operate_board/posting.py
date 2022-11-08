@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, Blueprint
 import pymysql
 
-bp = Blueprint('posting', __name__, url_prefix='/')
+bp = Blueprint('post_writed', __name__, url_prefix='/')
 
 @bp.route('/posting', methods=['GET','POST'])
 def posting():  

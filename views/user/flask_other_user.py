@@ -11,7 +11,7 @@ def other_user(route_user_nickname) :
         host=   "localhost",
         user=   "root", 
         passwd= database_pwd, 
-        db=     "register_db", 
+        db=     "sebuung_db", 
         charset="utf8"
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
