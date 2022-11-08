@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
-import pymysql
+from flask import render_template, Blueprint
 
 bp = Blueprint('write_board', __name__, url_prefix='/')
 

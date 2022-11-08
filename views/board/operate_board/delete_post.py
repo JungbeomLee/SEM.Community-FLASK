@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import request, redirect, url_for, Blueprint
 from views.utils.check_token import CHECK_TOKEN
 import pymysql
 
