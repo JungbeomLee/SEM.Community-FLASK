@@ -14,7 +14,7 @@ function getUserData(password) {
 
     fetch(`/user/own_user/post`, check)
         .then(res => res.json())
-        .then(data => {arrangeGetData(data)})
+        .then(data => {arrangePostData(data)})
 }
 
 
