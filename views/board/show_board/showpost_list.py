@@ -7,9 +7,9 @@ bp = Blueprint('showpost_list', __name__, url_prefix='/')
 def showpost_list():
     # board db connect
     db = pymysql.connect(
-        user='root',
+        host=   "localhost",
+        user=   "root", 
         passwd='0000',
-        host='localhost',
         port=3306,
         db='sebuung_db',
         charset='utf8'

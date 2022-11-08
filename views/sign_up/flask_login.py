@@ -25,7 +25,7 @@ def login_post() :
           host=   "localhost",
           user=   "root", 
           passwd= database_pwd, 
-          db=     "register_db", 
+          db=     "sebuung_db", 
           charset="utf8"
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
