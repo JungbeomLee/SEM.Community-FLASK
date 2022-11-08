@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import render_template, request, redirect, url_for, Blueprint
 import pymysql
 
 bp = Blueprint('update_post', __name__, url_prefix='/')
