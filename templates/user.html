@@ -1,55 +1,115 @@
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <script>
-            alert("{{messages[-1]}}")
-        </script>
-    {% endif %}
+{% if messages %}
+<script>
+    alert("{{messages[-1]}}")
+</script>
+{% endif %}
 {% endwith %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>user-profile</title>
+    <link rel="stylesheet" href="../static/css/user.css" />
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
+
 <body>
     <h1>USER {{ user_name }} PROFILE</h1>
 
     {% if pwd_check %}
-        <div>name : {{ user_data['user_name'] }}</div>
-        <form method="POST" action="http://localhost:8000/user/own_user" >
-            <span class="form-group">
-                <label for="change_profile">profile change</label>
-                <input type="text" class="form-control" id="change_profile" value="{{ user_data['user_profile'] }}" placeholder="자기소개"  name="change_profile" required/>
-            </span>
-            <button type="submit" class="btn btn-primary" >확인</button> 
-        </form>
+    <div id="load_user_image">
+        <div class="pic-holder pic-holder_unlogin" id="pic-holder">
+            <!-- uploaded pic shown here -->
+            <img id="profilePic" class="pic" src="{{ user_data['user_profile_image_link'] }}"
+                onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
+            {% if user_data['check_user_profile_image_name'] == False%}
+            <label onclick="openPopup_no_profile_image_pass();" for="newProfilePhoto" class="upload-file-block">
+                <div class="text-center">
+                    <div class="mb-2">
+                        <i class="fa fa-camera fa-2x"></i>
+                    </div>
+                    <div class="text-uppercase">Update <br /> Profile Photo</div>
+                </div>
+            </label>
+            {% else %}
+            <label onclick="openPopup_have_profile_image();" for="newProfilePhoto" class="upload-file-block">
+                <div class="text-center">
+                    <div class="mb-2">
+                        <i class="fa fa-camera fa-2x"></i>
+                    </div>
+                    <div class="text-uppercase">Update <br /> Profile Photo</div>
+                </div>
+            </label>
+            {% endif %}
+        </div>
+    </div>
 
-        <div>created_at : {{ user_data['user_created_at'] }}</div>
 
-        <form method="POST" action="http://localhost:8000/user/own_user">
-            <input type="button" value="change_password" onClick="location.href='/user/delete_account'" name="delect_password" >비밀번호 변경</input> 
-        </form>
+    <div>name : {{ user_data['user_name'] }}</div>
+    <form method="POST" action="http://localhost:8000/user/own_user">
+        <div class="form-group">
+            <label for="change_profile">nickname change : </label>
+            <input type="text" class="form-control" id="change_nickname" value="{{ user_data['user_nickname'] }}"
+                placeholder="닉네임" name="change_nickname" required />
+        </div>
 
-        <form method="POST" action="http://localhost:8000/user/own_user">
-            <input type="button" value="delete_user" onClick="location.href='/user/delete_account'" name="delect_password" >계정 탈퇴</input> 
-        </form>
+        <div class="form-group">
+            <label for="change_profile">profile change : </label>
+            <input type="text" class="form-control" id="change_profile" value="{{ user_data['user_profile'] }}"
+                placeholder="자기소개" name="change_profile" required />
+        </div>
+        <button type="submit" class="btn btn-primary">확인</button>
+    </form>
+
+    <div>created_at : {{ user_data['user_created_at'] }}</div>
+
+    <div>
+        <input type="button" value="change_password" onClick="location.href='/user/delete_account'"
+            name="delect_password">비밀번호 변경</input>
+    </div>
+
+    <div>
+        <input type="button" value="delete_user" onClick="location.href='/user/delete_account'"
+            name="delect_password">계정 탈퇴</input>
+    </div>
 
     {% else %}
-        <div>name : {{ user_data['user_name'] }}</div>
-        <div>profile : {{ user_data['user_profile'] }}</div>
-        <div>created_at : {{ user_data['user_created_at'] }}</div>
+    <div class="pic-holder pic-holder_unlogin" id="pic-holder">
+        <!-- uploaded pic shown here -->
+        <img id="profilePic" class="pic" id="pic" src="{{ user_data['user_profile_image_link'] }}"
+            onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
+    </div>
+    <div>name : {{ user_data['user_name'] }}</div>
+    <div>nickname : {{ user_data['user_nickname'] }}</div>
+    <div>profile : {{ user_data['user_profile'] }}</div>
+    <div>created_at : {{ user_data['user_created_at'] }}</div>
 
-        <form method="POST" action="http://localhost:8000/user/own_user" >
-            <div class="form-group">
-                <label for="password">사용자 정보 수정</label>
-                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password" required/>
-            </div>
-            <button type="submit" class="btn btn-primary" >확인</button>
-        </form>
+    <form method="POST" action="http://localhost:8000/user/own_user">
+        <div class="form-group">
+            <label for="password">사용자 정보 수정</label>
+            <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password"
+                required />
+        </div>
+        <button type="submit" class="btn btn-primary">확인</button>
+    </form>
     {% endif %}
 
+    <script src="../static/js/upload_user_image_popup.js"></script>
+    <script>
+        function openPopup_no_profile_image_pass() {
+            var user_link_primary = '{{ user_data["user_link_primary"] }}'
+            openPopup_no_profile_image(user_link_primary)
+        }
+    </script>
+
 </body>
+
 </html>

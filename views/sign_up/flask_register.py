@@ -7,16 +7,30 @@ from ..utils.env_var import database_pwd
 bp = Blueprint('flask_register', __name__, url_prefix='/')
 
 # my NEW register page
-@bp.route('/register', methods=['GET','POST'])
+@bp.route('/register')
 def register() :
 
-  if request.method == 'POST' and 'username' in request.form and 'useremail' in request.form and 'password' in request.form and 'profile' in request.form and 're_password' in request.form:
+  return render_template('register.html')
+
+
+@bp.route('/register/post', methods=['POST'])
+def register_post() :
+  if request.method == 'POST' and 'username' in request.form and 'useremail' in request.form and 'usernickname' in request.form and 'password' in request.form and 'profile' in request.form and 're_password' in request.form:
 
     user_name = request.form['username']
     useremail = request.form['useremail'].lower()
     password = request.form['password']
     re_password = request.form['re_password']
     user_profile = request.form['profile']
+    user_nickname = request.form['usernickname']
+
+    email_compare_check = False
+    password_and_rePassword_match_check = True
+    signUp_check = False
+    post_data_check = True
+
+    reps = {'email_compare_check' : email_compare_check, 'password_and_rePassword_match_check' : password_and_rePassword_match_check, 'signUp_check' : signUp_check, 'post_data_check' : post_data_check}
+
 
     # connect mysql DataBase
     register_db = pymysql.connect(
@@ -33,27 +47,30 @@ def register() :
 
     # already signed email check code & unmatch password check
     if(email_compare) :
-      flash('Already Signed up Email')
       register_db.close()
+      email_compare_check = True
+      reps['email_compare_check'] = email_compare_check
 
-      return redirect(url_for('flask_register.register'))
+      return reps
+
     elif(password != re_password) :
-      flash('Unmatch password!')
       register_db.close()
+      password_and_rePassword_match_check = False
+      reps['password_and_rePassword_match_check'] = password_and_rePassword_match_check
 
-      return redirect(url_for('flask_register.register'))
+      return reps
     else :
-      flash('Signing up for membership')
+      signUp_check = True
+      reps['signUp_check'] = signUp_check
       password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
 
-      cursor.execute('INSERT INTO users (name, email, password, profile) VALUES (% s, % s, % s, % s)', (user_name, useremail, password, user_profile))
+      cursor.execute('INSERT INTO users (name, nickname, email, password, profile_text) VALUES (% s, %s, % s, % s, % s)', (user_name, user_nickname,useremail, password, user_profile))
       register_db.commit()
       register_db.close()
 
-      flash('Sign up Completed!')
-
-      return redirect(url_for('flask_main.main_page'))
+      return reps
   else :    
-    return render_template('register.html')
+    post_data_check = False
+    reps['post_data_check'] = post_data_check
 
-
+    return reps

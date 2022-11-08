@@ -1,4 +1,4 @@
-from flask import (request, redirect, make_response, url_for, flash, render_template)
+from flask import (request, redirect, make_response, url_for, flash)
 from functools import wraps
 from .env_var import jwt_secret_key, jwt_access_token_expires, jwt_refresh_token_expires
 import jwt
@@ -10,7 +10,6 @@ class CHECK_TOKEN() :
         def wrapped(*args, **kwargs):
             access_token = request.cookies.get('access_token')
             refresh_token = request.cookies.get('refresh_token')
-            get_first_meet = request.cookies.get('first_meet')
 
             # 쿠키에 토큰이 둘 다 없을 경우
             if(not(access_token or refresh_token)) : 

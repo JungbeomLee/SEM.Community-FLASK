@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Upload user image</h1>
+    {% if check_image_upload_html == False %}
+    <form method="POST" action="http://localhost:8000/user/own_user/upload_image" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="upload_user_image">유저 프로필 이미지</label>
+            <input type="file" class="form-control" id="upload_user_image" name="upload_user_image" required />
+        </div>
+        <button type="submit" class="btn btn-primary">확인</button>
+    </form>
+    {% else %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <h3>{{ messages }}</h3>
+    <button onclick="window.close(); ">종료</button>
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+</body>
+
+</html>

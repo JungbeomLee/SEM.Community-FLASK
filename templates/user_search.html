@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Search</title>
 </head>
+
 <body>
     <h1>User Search</h1>
 
-    <form method="POST" action="http://localhost:8000/user" >
+    <form method="POST" action="http://localhost:8000/user">
         <div class="form-group">
             <label for="search_user_name">유저 닉네임</label>
-            <input type="search_user_name" class="form-control" id="search_user_name" name="search_user_name" required/>
+            <input type="text" class="form-control" id="search_user_name" name="search_user_name" required />
         </div>
-        <button type="submit" class="btn btn-primary" >확인</button>
+        <button type="submit" class="btn btn-primary">확인</button>
     </form>
 
     <h3>유저 목록</h3>
     {% if search_result == True %}
-        {% for i in search_user_name_list %}
-            <div>
-                <button>
-                    <option onClick="location.href='/user/{{ i }}'">{{ i }}</option>
-                </button>
-            </div>
-        {% endfor %}
+    {% for i in search_user_name_list %}
+    <div>
+        <button>
+            <option onClick="location.href='/user/{{ i }}'">{{ i }}</option>
+        </button>
+    </div>
+    {% endfor %}
     {% else %}
-        <h4>검색결과 없음</h4>
+    <h4>검색결과 없음</h4>
     {% endif %}
 </body>
+
 </html>

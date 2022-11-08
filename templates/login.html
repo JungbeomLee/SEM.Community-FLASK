@@ -1,42 +1,51 @@
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <script>
-            alert("{{messages[-1]}}")
-        </script>
-    {% endif %}
+{% if messages %}
+<script>
+    alert("{{messages[-1]}}")
+</script>
+{% endif %}
 {% endwith %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Register</title>
 </head>
+
 <body>
-    <div class = "container">
+    <h1 id="title"></h1>
+    <div class="container">
         <div class="row mt-5">
             <h1>로그인</h1>
         </div>
         <div class="row mt-5">
-        <div class="col-12">
-            
-            <form method="POST" action="http://localhost:8000/login" >
-                
-                <div class="form-group">
-                    <label for="useremail">이메일</label>
-                    <input type="email" class="form-control" placeholder="example@gmail.com" id="useremail" placeholder="이메일" name="useremail" required/>
-                </div>
-                <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password" required/>
-                </div>
+            <div class="col-12">
 
-                <button type="submit" class="btn btn-primary" >등록</button>
+                <form id="form">
 
-            </form>
-        </div>
+                    <div class="form-group">
+                        <label for="useremail">이메일</label>
+                        <input type="email" class="form-control" placeholder="example@gmail.com" id="useremail" placeholder="이메일" name="useremail" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password" required />
+                    </div>
+                    
+                    <button type="submit" onsubmit="return false;" class="login_btn" id="login_submit">등록</button>
+
+                </form>
+            </div>
         </div>
 </body>
+
+<script src="../static/js/login.js"></script>
+
 </html>
