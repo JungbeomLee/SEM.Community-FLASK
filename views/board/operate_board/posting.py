@@ -1,7 +1,7 @@
-from flask import request, redirect, url_for, Blueprint
+from flask import request, redirect, url_for, Blueprint, session
 import pymysql
 
-bp = Blueprint('posting', __name__, url_prefix='/')
+bp = Blueprint('to_posting', __name__, url_prefix='/')
 
 @bp.route('/posting', methods=['GET','POST'])
 def posting():  
@@ -28,11 +28,12 @@ def posting():
             start_day = request.form['start_day']
             contect = request.form['contect']
             tech_stack = request.form['tech_stack']
+            email = session['user_email']
             cursor.execute(
-                "INSERT INTO test(title,content,category,max_team,start_day,contect,tech_stack) VALUES('{0}','{1}','{2}',{3},'{4}','{5}','{6}');"
-                .format(title,content,category,max_team,start_day,contect,tech_stack))    
+                "INSERT INTO board(title,content,category,max_team,start_day,contect,tech_stack, email) VALUES('{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}');"
+                .format(title,content,category,max_team,start_day,contect,tech_stack,email))    
             db.commit()
             db.close()
         except:
-            return redirect(url_for('main'))
-    return redirect(url_for('main'))
+            return redirect(url_for('flask_main.not_found_error'))
+    return redirect(url_for('showpost_list.showpost_list'))

@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 import pymysql
 
 bp = Blueprint('showpost_list', __name__, url_prefix='/')
@@ -35,7 +35,7 @@ def search(search_word):
     cursor = db.cursor()
 
     search_word = request.form['search_word']
-    cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM test WHERE title LIKE '%{}%'".format(search_word))
+    cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board WHERE title LIKE '%{}%'".format(search_word))
     search_post_list = cursor.fetchall()
     db.close()
     return render_template('showpost_list.html', search_post_list=search_post_list)

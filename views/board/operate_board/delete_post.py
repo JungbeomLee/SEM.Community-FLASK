@@ -17,7 +17,7 @@ def delete_post(delete_board_number):
     cursor = db.cursor()
 
     if request.method == "GET":
-        cursor.execute("DELETE FROM test WHERE board_num = '{}'".format(delete_board_number))
+        cursor.execute("DELETE FROM board WHERE board_num = '{}'".format(delete_board_number))
         db.commit()
         db.close()
-    return redirect(url_for('showpost_list'))
+    return redirect(url_for('showpost_list.showpost_list'))

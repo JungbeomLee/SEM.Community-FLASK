@@ -17,8 +17,7 @@
     <p>create_day : {{ i[6] }}</p>
     <p>contect : {{ i[7] }}</p>
     <p>tech_stack : {{ i[8] }}</p>
-
-    {{ if e}}
+    
     <input type="button" value="게시글 삭제" onClick="location.href='/delete_post/{{ i[0] }}'">
     <input type="button" value="게시글 수정" onClick="location.href='/update_post/{{ i[0] }}'">
     {% endfor %}
