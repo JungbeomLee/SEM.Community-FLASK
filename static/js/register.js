@@ -34,7 +34,7 @@ function userLoginDataPost(user_Data) {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: new URLSearchParams({
-            'username' : user_Data['tauserName'],
+            'username' : user_Data['userName'],
             'usernickname' : user_Data['userNickName'],
             'useremail': user_Data['userEmail'],
             'password': user_Data['password'],
