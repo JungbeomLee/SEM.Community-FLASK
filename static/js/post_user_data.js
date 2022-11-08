@@ -47,7 +47,18 @@ function arrangePostData(data) {
             // 프로필 이미지 있을경우
             document.getElementById('user_image_label').innerHTML = '<label onclick="openPopup_have_profile_image();" for="newProfilePhoto" class="upload-file-block"><div class="text-center"><div class="mb-2"><i class="fa fa-camera fa-2x"></i></div><div class="text-uppercase">Update <br /> Profile Photo</div></div></label>'
         }
-        // 이름 
+        // 이름 GET
+        document.getElementById('user_title').innerText = data['user_nickname'];
+        // 프로필 이미지 링크 설정
+        document.getElementById('profilePic').src = data['user_profile_image_link']
+        // 이름 GET
+        document.getElementById('user_name').innerText = data['user_name'];
+        // 닉네임 GET
+        document.getElementById('user_nickname').innerText = data['user_name'];
+        // 자기소개 GET
+        document.getElementById('user_profile').innerText = data['user_name'];
+        // 가입일자 GET
+        document.getElementById('user_created_at').innerText = data['user_name'];
         
 
     }
