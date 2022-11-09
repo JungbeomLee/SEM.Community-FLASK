@@ -47,7 +47,11 @@ def user() :
         profile_image_link = f'https://flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/{profile_image_name}.jpg?{cache_cracker}'
         
         # create user_data dict
-        reps = {'user_name' : user_name, 'user_nickname' : user_nickname,'user_profile' : user_profile, 'user_created_at' : user_created_at, 'user_profile_image_link' : profile_image_link}
+        reps = {'user_name' : user_name, 
+                'user_nickname' : user_nickname,
+                'user_profile' : user_profile, 
+                'user_created_at' : user_created_at, 
+                'user_profile_image_link' : profile_image_link}
 
         return reps
 
