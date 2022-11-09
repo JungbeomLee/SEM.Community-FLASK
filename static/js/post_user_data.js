@@ -31,6 +31,7 @@ function arrangePostData(data) {
     // 유저 데이터 변경을 위한 비밀번호 입력 확인
     // 입력한 비밀번호가 일치할 경우
     if (data['password_check'] == true) {
+        alert('Confirmed passwrd')
         // 타이틀 설정
         document.getElementById('user_title').innerText = data['user_nickname'];
         // 타이틀 설정
