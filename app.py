@@ -13,7 +13,7 @@ def create_app() :
     from views import flask_token, flask_main
     from views.sign_up import flask_login, flask_register, flask_logout
     from views.user import flask_delete_account, flask_user_change_pwd, flask_other_user, flask_user_search
-    from views.user.own_user import flask_own_user, flask_own_user_get, flask_own_user_post
+    from views.user.own_user import flask_own_user, flask_own_user_get, flask_own_user_post, flask_own_user_upload_image
     from views.board.operate_board import posting, delete_post, update_post
     from views.board.show_board import write_board, showpost_list, showpost
     
@@ -24,6 +24,7 @@ def create_app() :
     app.register_blueprint(flask_own_user.bp)
     app.register_blueprint(flask_own_user_get.bp)
     app.register_blueprint(flask_own_user_post.bp)
+    app.register_blueprint(flask_own_user_upload_image.bp)
     app.register_blueprint(flask_delete_account.bp)
     app.register_blueprint(flask_user_change_pwd.bp)
     app.register_blueprint(flask_logout.bp)
@@ -35,7 +36,6 @@ def create_app() :
     app.register_blueprint(showpost.bp)
     app.register_blueprint(delete_post.bp)
     app.register_blueprint(update_post.bp)
-
     app.run(host='0.0.0.0', port=8000, debug=True)
 
 create_app()

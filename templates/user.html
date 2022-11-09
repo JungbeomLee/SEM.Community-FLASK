@@ -26,26 +26,30 @@
 
     <div class="pic-holder pic-holder_unlogin" id="pic-holder">
         <!-- uploaded pic shown here -->
-        <img id="profilePic" class="pic" id="pic" src="" alt="user profile image"
+        <img id="profilePic" class="pic" src="" alt="user profile image"
             onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
         <label id="user_image_label"></label>
     </div>
 
     <div id="user_name_div">이름 : <a id="user_name"></a></div>
-    <div id="user_nickname_div">닉네임 : <a id="user_nickname"></a></div>
-    <div id="user_profile_div">자기소개 : <a id="user_profile"></a></div>
+    <div id="form_input_change_user_data_div">
+        <div id="user_nickname_div">닉네임 : <a id="user_nickname"></a></div>
+        <div id="user_profile_div">자기소개 : <a id="user_profile"></a></div>
+    </div>
     <div id="user_created_at_div">가입일 : <a id="user_created_at"></a></div>
 
-    <form method="POST" action="http://localhost:8000/user/own_user">
+    <form id="form">
         <div class="form-group">
             <label for="password">사용자 정보 수정</label>
             <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password"
                 required />
         </div>
-        <button type="submit" class="btn btn-primary">확인</button>
+        <button type="submit" id="password_submit" class="btn btn-primary">확인</button>
     </form>
 
 </body>
 <script src="/static/js/get_user_data.js"></script>
+<script src="/static/js/post_user_data.js"></script>
+<script src="/static/js/upload_user_image_popup.js"></script>
 
 </html>

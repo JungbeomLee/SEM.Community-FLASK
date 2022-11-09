@@ -3,15 +3,15 @@ loginSubmit.addEventListener('click', (e) => {
     function login() {
         e.preventDefault(); // 기본 폼 동작 막기
 
-    let userEmail = document.getElementById('useremail').value;
-    let password = document.getElementById('password').value;
-    
-    let user_Data = new Object();
+        let userEmail = document.getElementById('useremail').value;
+        let password = document.getElementById('password').value;
+        
+        let user_Data = new Object();
 
-    user_Data.userEmail = userEmail;
-    user_Data.password = password;
+        user_Data.userEmail = userEmail;
+        user_Data.password = password;
 
-    userLoginDataPost(user_Data);
+        userLoginDataPost(user_Data);
     };
 
     login();
