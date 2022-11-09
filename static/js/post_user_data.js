@@ -52,7 +52,7 @@ function arrangePostData(data) {
         // 자기소개 기존값 넣기
         document.getElementById('change_profile').value = data['user_profile'];
         // 비밀번호 입력창 제거
-        document.getElementById('form').innerHTML = '';
+        document.getElementById('form').remove();
     }
 
 }
