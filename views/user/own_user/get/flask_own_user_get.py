@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template, request, flash, url_for, redirect, session
-from ...utils.check_token import CHECK_TOKEN
+from flask import Blueprint, request, session
+from views.utils.check_token import CHECK_TOKEN
 from dotenv import load_dotenv
-from ...utils.env_var import database_pwd
-import bcrypt
+from views.utils.env_var import database_pwd
 import pymysql
 import datetime
 

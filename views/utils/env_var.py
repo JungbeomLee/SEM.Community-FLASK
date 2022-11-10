@@ -3,7 +3,7 @@
 from dotenv import load_dotenv
 import os
 
-load_dotenv('../env')
+load_dotenv('.env')
 
 database_pwd = os.environ.get("DAKTEABYASE")
 jwt_secret_key = os.environ.get("JWT_SECRET_KEY")
