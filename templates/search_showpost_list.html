@@ -43,7 +43,7 @@
     <title>Document</title>    
 </head>
 <body>
-    <table id="showpost_list_table">
+    <table id="search_showpost_list_table">
         <thead>
             <tr>
                 <th>board_num</th>
@@ -54,20 +54,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for i in post_list %}
+            {% for j in search_post_list %}
             <tr onClick="location.href='/post/{{ i[0] }}'">
-                <td>{{ i[0] }}</td>
-                <td>{{ i[1] }}</td>
-                <td>{{ i[2] }}</td>
-                <td>{{ i[3] }}</td>
-                <td>{{ i[4] }}</td>
+                <td>{{ j[0] }}</td>
+                <td>{{ j[1] }}</td>
+                <td>{{ j[2] }}</td>
+                <td>{{ j[3] }}</td>
+                <td>{{ j[4] }}</td>
             </tr>
             {% endfor %}
-
         </tbody>
-
     </table>
-    
     <p><input type = "text" name = "search_word" id="search_word"/></p>
     <p><input type = "submit" value = "검색" onClick="search()"></p>
     

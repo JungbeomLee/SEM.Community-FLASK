@@ -16,7 +16,7 @@ def showpost_list():
     )
     cursor = db.cursor()
 
-    cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM test")
+    cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board")
     post_list = cursor.fetchall()
     db.close()
     return render_template('showpost_list.html', post_list=post_list)
@@ -34,8 +34,12 @@ def search(search_word):
     )
     cursor = db.cursor()
 
-    search_word = request.form['search_word']
-    cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board WHERE title LIKE '%{}%'".format(search_word))
-    search_post_list = cursor.fetchall()
-    db.close()
-    return render_template('showpost_list.html', search_post_list=search_post_list)
+    if request.method == "GET":
+        try:
+            search_word = request.values.get('search_word')
+            cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board WHERE title LIKE '%{}%'".format(search_word))
+            search_post_list = cursor.fetchall()
+            db.close()
+            return render_template('search_showpost_list.html', search_post_list=search_post_list)
+        except:
+            return render_template('index.html')
