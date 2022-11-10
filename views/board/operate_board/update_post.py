@@ -17,7 +17,7 @@ def update_post(update_board_number):
     cursor = db.cursor()
 
     if request.method == "GET":
-        cursor.execute("SELECT title, content, category, max_team, start_day, contect, tech_stack FROM test WHERE board_num = '{}'".format(update_board_number))
+        cursor.execute("SELECT title, content, category, max_team, start_day, contect, tech_stack FROM board WHERE board_num = '{}'".format(update_board_number))
         update_post = cursor.fetchall()
         return render_template('update_post.html', update_post=update_post)
     if request.method == "POST":

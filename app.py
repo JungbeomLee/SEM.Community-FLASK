@@ -2,8 +2,6 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 
-from views.user.own_user.get import flask_own_user_get
-
 load_dotenv()
 
 def create_app() : 
@@ -17,6 +15,7 @@ def create_app() :
     from views.user import flask_delete_account, flask_user_change_pwd, flask_other_user, flask_user_search
     from views.user.own_user import flask_own_user, flask_own_user_upload_image
     from views.user.own_user.post import flask_own_user_password_post, flask_own_change_user_data_post
+    from views.user.own_user.get import flask_own_user_get
     from views.board.operate_board import posting, delete_post, update_post
     from views.board.show_board import write_board, showpost_list, showpost
     
