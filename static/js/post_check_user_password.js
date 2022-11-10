@@ -22,7 +22,7 @@ passwordSubmit.addEventListener('click', (e) => {
 })
 
 function getUserData(check) {
-    fetch(`/user/own_user/post`, check)
+    fetch(`/user/own_user/passwordpost`, check)
         .then(res => res.json())
         .then(data => { arrangePostData(data) })
 }
@@ -47,13 +47,15 @@ function arrangePostData(data) {
             document.getElementById('user_image_label').innerHTML = '<label onclick="openPopup_have_profile_image();" for="newProfilePhoto" class="upload-file-block"><div class="text-center"><div class="mb-2"><i class="fa fa-camera fa-2x"></i></div><div class="text-uppercase">Update <br /> Profile Photo</div></div></label>';
         }
         // 수정 가능한 데이터 입력 form
-        document.getElementById('form_input_change_user_data_div').innerHTML = '<div class="form-group"><label>닉네임 : </label><input type="text" class="form-control" id="change_nickname" value="" placeholder="닉네임" name="change_nickname" required /></div><div class="form-group"><label>자기소개 : </label><input type="text" class="form-control" id="change_profile" value="" placeholder="자기소개" name="change_profile" required /></div><button type="submit" class="btn btn-primary">확인</button></form>';
+        document.getElementById('user_data_form').style = 'display : block';
         // 닉네임 기존값 넣기 
         document.getElementById('change_nickname').value = data['user_nickname'];
         // 자기소개 기존값 넣기
         document.getElementById('change_profile').value = data['user_profile'];
         // 비밀번호 입력창 제거
         document.getElementById('form').remove();
+    }else {
+        alert('Unmatch password');
     }
 
 }
