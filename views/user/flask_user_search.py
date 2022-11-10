@@ -19,7 +19,6 @@ def user_search() :
     # select all user_name
     cursor.execute("SELECT name FROM users")
     search_user_name = cursor.fetchall()
-    print(search_user_name)
     search_result = True
 
     # save all user_name to list

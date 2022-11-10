@@ -1,6 +1,6 @@
 from flask import (request, redirect, make_response, url_for, flash)
 from functools import wraps
-from .env_var import jwt_secret_key, jwt_access_token_expires, jwt_refresh_token_expires
+from views.utils.env_var import jwt_secret_key, jwt_access_token_expires, jwt_refresh_token_expires
 import jwt
 import datetime
 

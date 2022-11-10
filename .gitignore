@@ -1,3 +1,4 @@
 .env
-
 views/.env
+*.pyc
+__pycache__/
