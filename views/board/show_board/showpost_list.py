@@ -36,10 +36,8 @@ def search(search_word):
 
     if request.method == "GET":
         try:
-            search_word = request.values.get('search_word')
             cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board WHERE title LIKE '%{}%'".format(search_word))
             search_post_list = cursor.fetchall()
-            db.close()
             return render_template('search_showpost_list.html', search_post_list=search_post_list)
         except:
             return render_template('index.html')

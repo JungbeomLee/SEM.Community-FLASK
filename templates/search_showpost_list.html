@@ -54,14 +54,15 @@
             </tr>
         </thead>
         <tbody>
-            {% for j in search_post_list %}
+            {% for i in search_post_list %}
             <tr onClick="location.href='/post/{{ i[0] }}'">
-                <td>{{ j[0] }}</td>
-                <td>{{ j[1] }}</td>
-                <td>{{ j[2] }}</td>
-                <td>{{ j[3] }}</td>
-                <td>{{ j[4] }}</td>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>{{ i[3] }}</td>
+                <td>{{ i[4] }}</td>
             </tr>
+            
             {% endfor %}
         </tbody>
     </table>

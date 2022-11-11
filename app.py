@@ -39,6 +39,7 @@ def create_app() :
     app.register_blueprint(showpost.bp)
     app.register_blueprint(delete_post.bp)
     app.register_blueprint(update_post.bp)
+    
     app.run(host='0.0.0.0', port=8000, debug=True)
 
 create_app()
