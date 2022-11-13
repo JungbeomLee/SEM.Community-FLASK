@@ -14,9 +14,9 @@ passwordSubmit.addEventListener('click', (e) => {
             }),
             mode: 'no-cors'
         };
-
         getUserData(check)
     };
+    passwordSubmit.unbin
 
     password()
 })
@@ -39,15 +39,11 @@ function arrangePostData(data) {
         // 이미지 링크 설정
         document.getElementById('profilePic').src = data['user_profile_image_link'];
         // 프로필 이미지 유무 확인
-        if (data['check_user_profile_image_name_check'] = false) {
-            // 프로필 이미지 없을경우 openPopup_no_profile_image_pass(); 넣기
-            document.getElementById('user_image_label').innerHTML = '<label onclick="openPopup_no_profile_image_pass();" for="newProfilePhoto" class="upload-file-block"><div class="text-center"><div class="mb-2"><i class="fa fa-camera fa-2x"></i></div><div class="text-uppercase">Update <br /> Profile Photo</div></div></label>';
-        } else {
-            // 프로필 이미지 있을경우 openPopup_have_profile_image(); 넣기
-            document.getElementById('user_image_label').innerHTML = '<label onclick="openPopup_have_profile_image();" for="newProfilePhoto" class="upload-file-block"><div class="text-center"><div class="mb-2"><i class="fa fa-camera fa-2x"></i></div><div class="text-uppercase">Update <br /> Profile Photo</div></div></label>';
-        }
+        document.getElementById('openPopup_label_div').style= 'display : block;';
+        // 프로필 기존 닉네임, 자기소개란 숨김
+        document.getElementById('before_check_password_user_data').style.display = 'none'
         // 수정 가능한 데이터 입력 form
-        document.getElementById('user_data_form').style = 'display : block';
+        document.getElementById('user_data_form').style.display = 'block';
         // 닉네임 기존값 넣기 
         document.getElementById('change_nickname').value = data['user_nickname'];
         // 자기소개 기존값 넣기

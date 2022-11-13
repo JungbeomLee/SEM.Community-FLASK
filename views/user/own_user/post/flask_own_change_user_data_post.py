@@ -15,7 +15,6 @@ def user() :
     if request.method == 'POST' and 'user_nickname' in request.form or 'user_profile' in request.form:
         user_nickname = request.form['user_nickname']
         user_profile = request.form['user_profile']
-        print(user_nickname, user_profile)
         
         own_user_email = session['user_email']
         # connect mysql database

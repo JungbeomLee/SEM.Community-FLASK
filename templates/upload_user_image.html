@@ -12,23 +12,21 @@
 </head>
 
 <body>
-    <h1>Upload user image</h1>
-    {% if check_image_upload_html == False %}
-    <form method="POST" action="http://localhost:8000/user/own_user/upload_image" enctype="multipart/form-data">
+
+    <form id="upload_user_image_form">
+        <h1>Uploading user image</h1>
         <div class="form-group">
             <label for="upload_user_image">유저 프로필 이미지</label>
             <input type="file" class="form-control" id="upload_user_image" name="upload_user_image" required />
         </div>
-        <button type="submit" class="btn btn-primary">확인</button>
+        <button type="submit" id="upload_user_image_button">확인</button>
     </form>
-    {% else %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <h3>{{ messages }}</h3>
-    <button onclick="window.close(); ">종료</button>
-    {% endif %}
-    {% endwith %}
-    {% endif %}
-</body>
 
+    <div id="image_upload_success" style="display : none;">
+        <h1>Upload user image</h1>
+        <h3 id="success_message"></h3>
+        <button id="close_popup_button" onclick="window.close(); ">종료</button>
+    </div>
+</body>
+<script src="/static/js/upload_user_image_post.js"></script>
 </html>

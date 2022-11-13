@@ -54,6 +54,4 @@ def user_search() :
 
         return redirect(url_for('flask_user_search.user_search', search = form_search_name))
     
-    register_db.close()
-    
     return render_template('user_search.html', search_user_name_list = search_user_name_list, search_result = search_result)

@@ -7,7 +7,6 @@ function getUserData() {
         arrangeGetData(data)
     })
 }
-
 function arrangeGetData(data) {
     // 타이틀 설정
     document.getElementById('user_title').innerText = data['user_nickname'];

@@ -1,0 +1,6 @@
+Sever Side Rendering (SSR)
+모두에게 똑같이 보여야 하는 페이지
+페이지 데이터가 자주 바뀌는 경우
+
+Client Side Rendering (CSR)
+유저 개인정보와 관련된 페이지 등

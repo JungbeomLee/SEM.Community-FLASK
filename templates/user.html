@@ -26,43 +26,55 @@
 
     <div class="pic-holder pic-holder_unlogin" id="pic-holder">
         <!-- uploaded pic shown here -->
-        <img id="profilePic" class="pic" src="" alt="user profile image"
-            onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
-        <label id="user_image_label"></label>
+        <img id="profilePic" class="pic" src="" alt="user profile image" onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
+
+        <div id="openPopup_label_div" style="display: none;">
+            <label id="openPopup_user_profile_image" for="newProfilePhoto" class="upload-file-block">
+                <div class="text-center">
+                    <div class="mb-2"><i class="fa fa-camera fa-2x"></i></div>
+                    <div class="text-uppercase">Update <br /> Profile Photo</div>
+                </div>
+            </label>
+        </div>
     </div>
 
-    <div id="user_name_div">이름 : <a id="user_name"></a></div>
-    <div id="form_input_change_user_data_div">
-        <div id="user_nickname_div">닉네임 : <a id="user_nickname"></a></div>
-        <div id="user_profile_div">자기소개 : <a id="user_profile"></a></div>
+    <div id="user_data">
+        <div id="user_name_div">이름 : <a id="user_name"></a></div>
+        <div id="form_input_change_user_data_div">
+            <div id="before_check_password_user_data">
+                <div id="user_nickname_div">닉네임 : <a id="user_nickname"></a></div>
+                <div id="user_profile_div">자기소개 : <a id="user_profile"></a></div>
+            </div>
 
-        <form id="user_data_form" style="display: none;">
+            <form id="user_data_form" style="display: none;">
+                <div class="form-group">
+                    <label>닉네임 : </label>
+                    <input type="text" class="form-control" id="change_nickname" value="" placeholder="닉네임" name="change_nickname" required />
+                </div>
+                <div class="form-group">
+                    <label>자기소개 : </label>
+                    <input type="text" class="form-control" id="change_profile" value="" placeholder="자기소개" name="change_profile" required />
+                </div>
+                <button id="change_user_data_submit" type="submit">확인</button>
+            </form>
+        </div>
+        <div id="user_created_at_div">가입일 : <a id="user_created_at"></a></div>
+
+        <form id="form">
             <div class="form-group">
-                <label>닉네임 : </label>
-                <input type="text" class="form-control" id="change_nickname" value="" placeholder="닉네임" name="change_nickname" required />
+                <label for="password">사용자 정보 수정</label>
+                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password"
+                    required />
             </div>
-            <div class="form-group">
-                <label>자기소개 : </label>
-                <input type="text" class="form-control" id="change_profile" value="" placeholder="자기소개" name="change_profile" required />
-            </div>
-            <button id="change_user_data_submit" type="submit">확인</button>
+            <button type="submit" id="password_submit" class="btn btn-primary">확인</button>
         </form>
     </div>
-    <div id="user_created_at_div">가입일 : <a id="user_created_at"></a></div>
-
-    <form id="form">
-        <div class="form-group">
-            <label for="password">사용자 정보 수정</label>
-            <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해 주세요" name="password"
-                required />
-        </div>
-        <button type="submit" id="password_submit" class="btn btn-primary">확인</button>
-    </form>
 
 </body>
+<script src="/static/js/get_user_image.js" type="module"></script>
 <script src="/static/js/get_user_data.js"></script>
 <script src="/static/js/post_check_user_password.js"></script>
 <script src="/static/js/post_change_user_data.js"></script>
-<script src="/static/js/upload_user_image_popup.js"></script>
+<script src="/static/js/upload_user_image_popup.js" type="module"></script>
 
 </html>
