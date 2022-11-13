@@ -17,7 +17,7 @@ def update_post(update_board_number):
     cursor = db.cursor()
 
     if request.method == "GET":
-        cursor.execute("SELECT title, content, category, max_team, start_day, contect, tech_stack FROM test WHERE board_num = '{}'".format(update_board_number))
+        cursor.execute("SELECT title, content, category, max_team, start_day, contect, tech_stack FROM board WHERE board_num = '{}'".format(update_board_number))
         update_post = cursor.fetchall()
         return render_template('update_post.html', update_post=update_post)
     if request.method == "POST":
@@ -28,7 +28,7 @@ def update_post(update_board_number):
         update_start_day = request.form['update_start_day']
         update_contect = request.form['update_contect']
         update_tech_stack = request.form['update_tech_stack']
-        cursor.execute("UPDATE test SET title = '{}', content = '{}', category = '{}', max_team = {}, start_day = '{}', contect = '{}', tech_stack = '{}' WHERE board_num = {}".format(update_title,update_content,update_category,update_max_team,update_start_day,update_contect,update_tech_stack,update_board_number))#update 코드
+        cursor.execute("UPDATE board SET title = '{}', content = '{}', category = '{}', max_team = {}, start_day = '{}', contect = '{}', tech_stack = '{}' WHERE board_num = {}".format(update_title,update_content,update_category,update_max_team,update_start_day,update_contect,update_tech_stack,update_board_number))#update 코드
         db.commit()
         db.close()
-        return redirect(url_for('showpost_list'))
+        return redirect(url_for('showpost_list.showpost_list'))

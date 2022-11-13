@@ -7,7 +7,7 @@ bp = Blueprint('posting', __name__, url_prefix='/')
 def showpost(select_board_number):
     db = pymysql.connect(
         user='root',
-        passwd='0000',
+        passwd='0000',  
         host='localhost',
         port=3306,
         db='sebuung_db',
@@ -15,8 +15,8 @@ def showpost(select_board_number):
     )
     cursor = db.cursor()
 
-    if request.method == "GET":
-        cursor.execute("SELECT * FROM test WHERE board_num = '{}'".format(select_board_number))
+    if request.method == "GET": 
+        cursor.execute("SELECT * FROM board WHERE board_num = '{}'".format(select_board_number))
         post_content = cursor.fetchall()
         db.close()
     return render_template('showpost.html', post_content = post_content)

@@ -16,7 +16,6 @@ passwordSubmit.addEventListener('click', (e) => {
         };
         getUserData(check)
     };
-    passwordSubmit.unbin
 
     password()
 })
