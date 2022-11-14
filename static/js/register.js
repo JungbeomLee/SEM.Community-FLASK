@@ -1,27 +1,24 @@
 const loginSubmit = document.getElementById('login_submit')
 loginSubmit.addEventListener('click', (e) => {
     function login() {
-        e.preventDefault(); // 기본 폼 동작 막기
-    
-    let userName = document.getElementById('username').value;
-    let userNickName = document.getElementById('usernickname').value;
-    let userEmail = document.getElementById('useremail').value;
-    let password = document.getElementById('password').value;
-    let rePassword = document.getElementById('re_password').value;
-    let profile = document.getElementById('profile').value;
 
-    let user_Data = new Object();
+        let userName = document.getElementById('username').value;
+        let userNickName = document.getElementById('usernickname').value;
+        let userEmail = document.getElementById('useremail').value;
+        let password = document.getElementById('password').value;
+        let rePassword = document.getElementById('re_password').value;
+        let profile = document.getElementById('profile').value;
+        let user_Data = new Object();
 
-    user_Data.userName = userName;
-    user_Data.userNickName = userNickName;
-    user_Data.userEmail = userEmail;
-    user_Data.password = password;
-    user_Data.rePassword = rePassword;
-    user_Data.profile = profile;
+        user_Data.userName = userName;
+        user_Data.userNickName = userNickName;
+        user_Data.userEmail = userEmail;
+        user_Data.password = password;
+        user_Data.rePassword = rePassword;
+        user_Data.profile = profile;
 
-    checkFormInput(user_Data)
-
-    userLoginDataPost(user_Data)
+        checkFormInput(user_Data)
+        userLoginDataPost(user_Data)
     };
 
     login();
@@ -49,9 +46,7 @@ function userLoginDataPost(user_Data) {
             if(data['post_data_check'] == true) {
                 if(data['email_compare_check'] == true) {
                     alert('Already sign up email')
-                }else if(data['password_and_rePassword_match_check'] == false){
-                    alert('Unmatch password')
-                }else{
+                }else {
                     if(data['signUp_check'] == true) {
                         alert('Sign up successed')
                         location.href='/'
@@ -82,6 +77,11 @@ function checkFormInput(user_Data){
     }else if(user_Data['profile'] == ''){
         alert('Please type your profile')
         throw"stop";
+    }else {
+        if(user_Data['password'] != user_Data['rePassword']){
+            alert('Unmatch password')
+            throw"stop";
+        }
     }
 
 }

@@ -25,11 +25,10 @@ def register_post() :
     user_nickname = request.form['usernickname']
 
     email_compare_check = False
-    password_and_rePassword_match_check = True
     signUp_check = False
     post_data_check = True
 
-    reps = {'email_compare_check' : email_compare_check, 'password_and_rePassword_match_check' : password_and_rePassword_match_check, 'signUp_check' : signUp_check, 'post_data_check' : post_data_check}
+    reps = {'email_compare_check' : email_compare_check, 'signUp_check' : signUp_check, 'post_data_check' : post_data_check}
 
 
     # connect mysql DataBase
@@ -50,13 +49,6 @@ def register_post() :
       register_db.close()
       email_compare_check = True
       reps['email_compare_check'] = email_compare_check
-
-      return reps
-
-    elif(password != re_password) :
-      register_db.close()
-      password_and_rePassword_match_check = False
-      reps['password_and_rePassword_match_check'] = password_and_rePassword_match_check
 
       return reps
     else :
