@@ -1,3 +1,9 @@
+window.addEventListener("keyup", (e) => {
+    if(e.code === "Enter") {
+        document.getElementById("login_submit").click();
+    }
+})
+
 const loginSubmit = document.getElementById('login_submit')
 loginSubmit.addEventListener('click', (e) => {
     function login() {
@@ -85,3 +91,4 @@ function checkFormInput(user_Data){
     }
 
 }
+

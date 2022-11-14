@@ -14,20 +14,20 @@
 <body>
     <h1>User Search</h1>
 
-    <form method="POST" action="http://localhost:8000/user">
+    <div id="search_user_nickname">
         <div class="form-group">
             <label for="search_user_name">유저 닉네임</label>
             <input type="text" class="form-control" id="search_user_name" name="search_user_name" required />
         </div>
         <button type="submit" class="btn btn-primary">확인</button>
-    </form>
+    </div>
 
     <h3>유저 목록</h3>
     {% if search_result == True %}
-    {% for i in search_user_name_list %}
+    {% for i in search_user_nickname_list %}
     <div>
         <button>
-            <option onClick="location.href='/user/{{ i }}'">{{ i }}</option>
+            <option onClick="location.href='/user/other_user/{{ i }}'">{{ i }}</option>
         </button>
     </div>
     {% endfor %}

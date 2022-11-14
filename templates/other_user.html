@@ -16,13 +16,18 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}" />
     <title>user-profile</title>
 </head>
 
 <body>
+    <div class="pic-holder pic-holder_unlogin" id="pic-holder">
+        <!-- uploaded pic shown here -->
+        <img id="profilePic" class="pic" src="{{ other_user_data['profile_image_link'] }}" alt="user profile image" onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
+    </div>
     <h1>USER {{ other_user_name }} PROFILE</h1>
     <div>name : {{ other_user_data['user_name'] }}</div>
-    <div>name : {{ other_user_data['user_nickname'] }}</div>
+    <div>nickname : {{ other_user_data['other_user_nickname'] }}</div>
     <div>profile : {{ other_user_data['user_profile'] }}</div>
     <div>created_at : {{ other_user_data['user_created_at'] }}</div>
 </body>

@@ -41,6 +41,3 @@ function postChangeUserData(user_Data) {
         });
 }
 
-
-
-

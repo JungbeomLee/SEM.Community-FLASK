@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, request
 from ..utils.env_var import database_pwd
 import pymysql
+import datetime
 
-bp = Blueprint('flask_other_user', __name__, url_prefix='/user')
+bp = Blueprint('flask_other_user', __name__, url_prefix='/user/other_user')
 
 @bp.route('/<route_user_nickname>', methods=['GET'])
 def other_user(route_user_nickname) :
@@ -15,34 +16,41 @@ def other_user(route_user_nickname) :
         charset="utf8"
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
-    
+
     # 입력받은 route_user_nickname이 실제 가입 유저인지 확인
-    cursor.execute("SELECT name FROM users WHERE name=%s", route_user_nickname)
+    cursor.execute("SELECT nickname FROM users WHERE nickname=%s", route_user_nickname)
     try : 
-        check_route_user_nickname = cursor.fetchone()['name']
+        check_route_user_nickname = cursor.fetchone()['nickname']
 
         if check_route_user_nickname :
-            cursor.execute("SELECT email FROM users WHERE name=%s", route_user_nickname)
+            cursor.execute("SELECT email FROM users WHERE nickname=%s", route_user_nickname)
             route_search_user_email = cursor.fetchone()['email']
 
             # create user_data dict variable
             # get user_data
+            cursor.execute("SELECT profile_image_name FROM users WHERE email=%s", route_search_user_email)
+            other_user_profile_image_name = cursor.fetchone()['profile_image_name']
+            cache_cracker = datetime.datetime.utcnow()
+            profile_image_link = f'https://flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/{other_user_profile_image_name}.jpg?{cache_cracker}'
+
             cursor.execute("SELECT name FROM users WHERE email=%s", route_search_user_email)
             other_user_name = cursor.fetchone()['name']
+            
             cursor.execute("SELECT nickname FROM users WHERE email=%s", route_search_user_email)
             other_user_nickname = cursor.fetchone()['nickname']
+            
             cursor.execute("SELECT profile_text FROM users WHERE email=%s", route_search_user_email)
             user_profile = cursor.fetchone()['profile_text']
+            
             cursor.execute("SELECT created_at FROM users WHERE email=%s", route_search_user_email)
             user_created_at = cursor.fetchone()['created_at']
             register_db.close()
 
             # create user_data dict
-            user_data = {'user_name' : other_user_name, 'other_user_nickname' : other_user_nickname, 'user_profile' : user_profile, 'user_created_at' : user_created_at}
+            user_data = {'profile_image_link' : profile_image_link, 'user_name' : other_user_name, 'other_user_nickname' : other_user_nickname, 'user_profile' : user_profile, 'user_created_at' : user_created_at}
 
             route_name = request.args.get("name", other_user_name)
-            return render_template("other_user.html", name = route_name, other_user_data = user_data, other_user_name = other_user_name)
-            
+            return render_template("other_user.html", name = route_name, other_user_data = user_data, other_user_name = other_user_name)        
     except :
         register_db.close()
 

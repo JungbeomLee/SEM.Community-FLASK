@@ -28,6 +28,7 @@ def user() :
         # get user_data
         cursor.execute("SELECT name FROM users WHERE email=%s", own_user_email)
         user_name = cursor.fetchone()['name']
+        
 
         cursor.execute("SELECT nickname FROM users WHERE email=%s", own_user_email)
         user_nickname = cursor.fetchone()['nickname']

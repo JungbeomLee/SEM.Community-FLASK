@@ -4,7 +4,7 @@ import pymysql
 
 bp = Blueprint('flask_user_search', __name__, url_prefix='/')
 
-@bp.route('/user', methods=['GET','POST'])
+@bp.route('/user/other_user', methods=['GET','POST'])
 def user_search() :
     # connect mysql database
     register_db = pymysql.connect(
@@ -16,42 +16,42 @@ def user_search() :
     )
     cursor = register_db.cursor(pymysql.cursors.DictCursor)
 
-    # select all user_name
-    cursor.execute("SELECT name FROM users")
-    search_user_name = cursor.fetchall()
+    # select all user_nickname
+    cursor.execute("SELECT nickname FROM users")
+    search_user_nickname = cursor.fetchall()
     search_result = True
 
-    # save all user_name to list
-    search_user_name_list = []
-    for i in range(len(search_user_name)) :
-        search_user_name_list.append(search_user_name[i]['name'])
+    # save all user_nickname to list
+    search_user_nickname_list = []
+    for i in range(len(search_user_nickname)) :
+        search_user_nickname_list.append(search_user_nickname[i]['nickname'])
     
     # get url parameters
-    search_name = request.args.get('search')
+    search_nickname = request.args.get('search')
     # checkout url parameters
-    if search_name :
-        # search for similar user_name in database
-        cursor.execute('SELECT name FROM users WHERE name like "%{}%"'.format(search_name))
-        search_user_name = cursor.fetchall()
+    if search_nickname :
+        # search for similar user_nickname in database
+        cursor.execute('SELECT nickname FROM users WHERE nickname like "%{}%"'.format(search_nickname))
+        search_user_nickname = cursor.fetchall()
         register_db.close()
         
         # check search result
-        if search_user_name :
+        if search_user_nickname :
             search_result = True
-            search_user_name_list = []
+            search_user_nickname_list = []
 
             # make search results to list
-            for i in range(len(search_user_name)) :
-                search_user_name_list.append(search_user_name[i]['name'])
+            for i in range(len(search_user_nickname)) :
+                search_user_nickname_list.append(search_user_nickname[i]['nickname'])
         else :
             search_result = False
 
     # return form parameters to url parameters
-    if request.method == 'POST' and 'search_user_name' in request.form :
-        # get POST form_search_name
-        form_search_name = request.form['search_user_name']
+    if request.method == 'POST' and 'search_user_nickname' in request.form :
+        # get POST form_search_nickname
+        form_search_nickname = request.form['search_user_nickname']
         register_db.close()
 
-        return redirect(url_for('flask_user_search.user_search', search = form_search_name))
+        return redirect(url_for('flask_user_search.user_search', search = form_search_nickname))
     
-    return render_template('user_search.html', search_user_name_list = search_user_name_list, search_result = search_result)
+    return render_template('user_search.html', search_user_nickname_list = search_user_nickname_list, search_result = search_result)

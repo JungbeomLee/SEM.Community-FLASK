@@ -4,37 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        table {
-          border:1px solid;
-          text-align:center;
-          margin: auto;
-        }
- 
-        table thead tr {
-          background:gray;
-          color:white;
-        }
-
-        table tbody tr:hover {
-          background-color: lightgray;
-          cursor:pointer;
-        }
-
-        td {
-          border:1px solid
-        }
-
-        th {
-          border:1px solid
-        }
-
-        p {
-          margin:auto;
-          margin-top:30px;
-          text-align:center;
-        }
-    </style>
     <script>
       function search(){
         location.href = `/showpost_list/${document.getElementById('search_word').value}` 
