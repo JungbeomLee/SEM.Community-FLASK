@@ -14,6 +14,7 @@ passwordSubmit.addEventListener('click', (e) => {
             }),
             mode: 'no-cors'
         };
+        
         getUserData(check)
     };
 

@@ -22,7 +22,9 @@ def main_page() :
     first_meet.set_cookie('first_meet', first_meet_cookie_content)
     return first_meet
 
-  if 'user_email' in session :
+  access_token = request.cookies.get('access_token')
+
+  if access_token :
     login_status = True
     
   return render_template('index.html', login_status = login_status)

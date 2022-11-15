@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, flash, session
 from views.utils.check_token import CHECK_TOKEN
-from views.utils.env_var import database_pwd
+from views.utils.env_var import database_pwd, jwt_secret_key
 from views.utils.upload_image_to_s3 import s3_put_object
 from views.utils.connect_aws import s3_connection
 import pymysql
+import jwt
 
 bp = Blueprint('flask_own_user_upload_image_post', __name__, url_prefix='/user/own_user/upload_image')
 
@@ -40,9 +41,10 @@ def user_profile_upload_image() :
         cursor = register_db.cursor(pymysql.cursors.DictCursor)
 
         if check_image_upload_s3 == True :
-            own_user_email = session['user_email']
+            access_token = request.cookies.get('access_token')
+            decode_access_token_emil = jwt.decode(access_token, jwt_secret_key, algorithms='HS256')['user_email']
 
-            cursor.execute('UPDATE users SET profile_image_name=%s WHERE email=%s', (profile_image_name, own_user_email))
+            cursor.execute('UPDATE users SET profile_image_name=%s WHERE email=%s', (profile_image_name, decode_access_token_emil))
             register_db.commit()
             register_db.close()
 

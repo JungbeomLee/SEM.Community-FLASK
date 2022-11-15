@@ -38,10 +38,12 @@
             </div>
 
             <form id="user_data_form" style="display: none;">
-                <div class="form-group">
+                <div id="nickname_duplicate_check_text"></div>
+                <span class="form-group">
                     <label>닉네임 : </label>
                     <input type="text" class="form-control" id="change_nickname" value="" placeholder="닉네임" name="change_nickname" required />
-                </div>
+                </span>
+                <button id="nickname_duplicate_check_button">중복확인</button>
                 <div class="form-group">
                     <label>자기소개 : </label>
                     <input type="text" class="form-control" id="change_profile" value="" placeholder="자기소개" name="change_profile" required />

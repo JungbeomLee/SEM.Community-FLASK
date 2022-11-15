@@ -1,9 +1,10 @@
 from flask import Blueprint, request, session
 from views.utils.check_token import CHECK_TOKEN
 from dotenv import load_dotenv
-from views.utils.env_var import database_pwd
+from views.utils.env_var import database_pwd, jwt_secret_key
 import pymysql
 import datetime
+import jwt
 
 load_dotenv('../env')
 
@@ -13,7 +14,8 @@ bp = Blueprint('flask_own_user_get', __name__, url_prefix='/user/own_user')
 @CHECK_TOKEN.check_for_token
 def user() :
     if request.method == 'GET':
-        own_user_email = session['user_email']
+        access_token = request.cookies.get('access_token')
+        decode_access_token_emil = jwt.decode(access_token, jwt_secret_key, algorithms='HS256')['user_email']
         # connect mysql database
         register_db = pymysql.connect(
             host=   "localhost",
@@ -26,20 +28,20 @@ def user() :
 
         # create user_data dict variable
         # get user_data
-        cursor.execute("SELECT name FROM users WHERE email=%s", own_user_email)
+        cursor.execute("SELECT name FROM users WHERE email=%s", decode_access_token_emil)
         user_name = cursor.fetchone()['name']
         
 
-        cursor.execute("SELECT nickname FROM users WHERE email=%s", own_user_email)
+        cursor.execute("SELECT nickname FROM users WHERE email=%s", decode_access_token_emil)
         user_nickname = cursor.fetchone()['nickname']
 
-        cursor.execute("SELECT profile_text FROM users WHERE email=%s", own_user_email)
+        cursor.execute("SELECT profile_text FROM users WHERE email=%s", decode_access_token_emil)
         user_profile = cursor.fetchone()['profile_text']
 
-        cursor.execute("SELECT created_at FROM users WHERE email=%s", own_user_email)
+        cursor.execute("SELECT created_at FROM users WHERE email=%s", decode_access_token_emil)
         user_created_at = cursor.fetchone()['created_at']
 
-        cursor.execute('SELECT profile_image_name FROM users WHERE email=%s', own_user_email)
+        cursor.execute('SELECT profile_image_name FROM users WHERE email=%s', decode_access_token_emil)
         profile_image_name = cursor.fetchone()['profile_image_name']
         register_db.close()
 
