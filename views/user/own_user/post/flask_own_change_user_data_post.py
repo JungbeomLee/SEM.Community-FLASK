@@ -51,7 +51,7 @@ def user() :
         
         try : 
             cursor.execute("SELECT nickname FROM users WHERE nickname=%s", request_nickname)
-            db_nickname = cursor.fetchone()['nickname']
+            db_nickname = cursor.fetchone()['nickname'].lower()
         except :
             db_nickname = ''
 
@@ -59,8 +59,7 @@ def user() :
         decode_access_token_emil = jwt.decode(access_token, jwt_secret_key, algorithms='HS256')['user_email']
 
         cursor.execute("SELECT nickname FROM users WHERE email=%s", decode_access_token_emil)
-        user_nickname = cursor.fetchone()['nickname']
-        print(user_nickname)
+        user_nickname = cursor.fetchone()['nickname'].lower()
 
         if request_nickname == user_nickname :
             reps = {'nickname_duplicate_check' : 0}

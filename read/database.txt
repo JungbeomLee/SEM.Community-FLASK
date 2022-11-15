@@ -1,2 +1,2 @@
-create database sebuun_db;
+create database sebuung_db;
 

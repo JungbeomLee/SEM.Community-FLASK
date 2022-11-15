@@ -3,7 +3,7 @@ let nickname_duplicate_check = 2;
 const nickNameDuplicateBtn = document.getElementById('nickname_duplicate_check_button')
 nickNameDuplicateBtn.addEventListener('click', (e) => {
     e.preventDefault(); // 기본 폼 동작 막기
-    let userNickname = document.getElementById('change_nickname').value;
+    let userNickname = document.getElementById('usernickname').value;
 
     if (userNickname == '') {
         alert('Please type your nickname')

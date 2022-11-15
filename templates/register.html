@@ -32,14 +32,15 @@
                         <label for="username">사용자 이름</label>
                         <input type="text" id="username" placeholder="사용자 이름" name="username" required />
                     </div>
-                    <div class="form-group">
+                    <div id="nickname_duplicate_check_text"></div>
+                    <span class="form-group">
                         <label for="usernickname">닉네임</label>
                         <input type="text" id="usernickname" placeholder="닉네임" name="usernickname" required />
-                    </div>
+                    </span>
+                    <button id="nickname_duplicate_check_button">중복확인</button>
                     <div class="form-group">
                         <label for="useremail">이메일</label>
-                        <input type="email" placeholder="example@gmail.com" id="useremail" placeholder="이메일"
-                            name="useremail" required />
+                        <input type="email" placeholder="example@gmail.com" id="useremail" placeholder="이메일" name="useremail" required />
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
@@ -60,5 +61,6 @@
 </body>
 
 <script src="../static/js/register.js"></script>
+<script src="/static/js/post_change_user_data.js"></script>
 
 </html>
