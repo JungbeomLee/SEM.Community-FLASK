@@ -4,6 +4,45 @@ window.addEventListener("keyup", (e) => {
     }
 })
 
+let nickname_duplicate_check = 2;
+
+const nickNameDuplicateBtn = document.getElementById('nickname_duplicate_check_button')
+nickNameDuplicateBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // 기본 폼 동작 막기
+    let userNickname = document.getElementById('usernickname').value;
+
+    if (userNickname == '') {
+        alert('Please type your nickname')
+        return "stop";
+    }
+
+    let changeData = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'user_nickname': userNickname,
+        }),
+        mode: 'no-cors'
+    };
+
+    fetch(`/register/registerchecknickname`, changeData)
+        .then(res => res.json())
+        .then(data => {
+            if (data['nickname_duplicate_check'] == 0) {
+                nickname_duplicate_check = 0;
+                document.getElementById('nickname_duplicate_check_text').innerText = "Already you using this nickname";
+            }else if (data['nickname_duplicate_check'] == 1){
+                nickname_duplicate_check = 1;
+                document.getElementById('nickname_duplicate_check_text').innerText = "You can use this nickname";
+            }else {
+                nickname_duplicate_check = -1;
+                document.getElementById('nickname_duplicate_check_text').innerText = "You can't use this nickname";
+            }
+        });
+})
+
 const loginSubmit = document.getElementById('login_submit')
 loginSubmit.addEventListener('click', (e) => {
     function login() {
@@ -31,6 +70,17 @@ loginSubmit.addEventListener('click', (e) => {
 });
 
 function userLoginDataPost(user_Data) {
+    if (nickname_duplicate_check == 2){
+        alert('You have to check your nickname duplicate')
+        return"stop"
+    }else if(nickname_duplicate_check != -1) {
+        postRegisterData(user_Data)
+    }else {
+        alert("You can't use this nickname");
+    }
+}
+
+function postRegisterData(user_Data){
     let loginData = {
         method: 'POST',
         headers: {

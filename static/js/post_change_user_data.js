@@ -20,7 +20,7 @@ nickNameDuplicateBtn.addEventListener('click', (e) => {
         }),
         mode: 'no-cors'
     };
-    fetch(`/user/own_user/changedatapost`, changeData)
+    fetch(`/user/own_user/ownuserchecknickname`, changeData)
         .then(res => res.json())
         .then(data => {
             if (data['nickname_duplicate_check'] == 0) {
@@ -45,7 +45,7 @@ postUserDataSubmit.addEventListener('click', (e) => {
     }else {
         if (nickname_duplicate_check != -1) {
             function changeUserData() {
-                let userNickname = document.getElementById('change_nickname').value;
+                let userNickname = document.getElementById('usernickname').value;
                 let userProfile = document.getElementById('change_profile').value;
         
                 if (userNickname == '') {
