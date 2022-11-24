@@ -22,10 +22,12 @@ def user() :
     # nickname duplicate check
     if request.method == 'POST' and 'user_nickname' in request.form :
         request_nickname = request.form['user_nickname'].lower()
+        print(request_nickname)
         
         try : 
             cursor.execute("SELECT nickname FROM users WHERE nickname=%s", request_nickname)
             db_nickname = cursor.fetchone()['nickname'].lower()
+            print(db_nickname)
         except :
             db_nickname = ''
 
@@ -34,6 +36,7 @@ def user() :
 
         cursor.execute("SELECT nickname FROM users WHERE email=%s", decode_access_token_emil)
         user_nickname = cursor.fetchone()['nickname'].lower()
+        print(user_nickname)
 
         if request_nickname == user_nickname :
             reps = {'nickname_duplicate_check' : 0}

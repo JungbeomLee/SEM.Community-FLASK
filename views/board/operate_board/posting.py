@@ -1,4 +1,5 @@
 from flask import request, redirect, url_for, Blueprint, session
+from ...utils.env_var import database_pwd
 import pymysql
 
 bp = Blueprint('post_writed', __name__, url_prefix='/')
@@ -7,12 +8,12 @@ bp = Blueprint('post_writed', __name__, url_prefix='/')
 def posting():  
     # board db connect
     db = pymysql.connect(
-        user='root',
-        passwd='0000',
-        host='localhost',
+        host=   "localhost",
+        user=   "root", 
+        passwd= database_pwd, 
         port=3306,
-        db='sebuung_db',
-        charset='utf8'
+        db=     "sebuung_db", 
+        charset="utf8"
     )
 
     cursor = db.cursor()
