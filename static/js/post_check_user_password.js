@@ -45,7 +45,7 @@ function arrangePostData(data) {
         // 수정 가능한 데이터 입력 form
         document.getElementById('user_data_form').style.display = 'block';
         // 닉네임 기존값 넣기 
-        document.getElementById('change_nickname').value = data['user_nickname'];
+        document.getElementById('usernickname').value = data['user_nickname'];
         // 자기소개 기존값 넣기
         document.getElementById('change_profile').value = data['user_profile'];
         // 비밀번호 입력창 제거
