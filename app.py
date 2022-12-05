@@ -9,7 +9,7 @@ def create_app() :
 
     from views.sign_up import flask_register
     from views.sign_up.post import flask_register_post, flask_register_nickname_check
-    from views import flask_token, flask_main
+    from views import flask_main
     from views.sign_up import flask_login, flask_logout
     from views.user import flask_delete_account, flask_user_change_pwd, flask_other_user, flask_user_search
     from views.user.own_user import flask_own_user, flask_own_user_upload_image
@@ -23,7 +23,6 @@ def create_app() :
     app.register_blueprint(flask_register_post.bp)
     app.register_blueprint(flask_register_nickname_check.bp)
     app.register_blueprint(flask_login.bp)
-    app.register_blueprint(flask_token.bp)
     app.register_blueprint(flask_own_user.bp)
     app.register_blueprint(flask_own_user_get.bp)
     app.register_blueprint(flask_own_user_password_post.bp)

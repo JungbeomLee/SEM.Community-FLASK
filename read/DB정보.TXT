@@ -1,5 +1,6 @@
 CREATE TABLE board(
 	board_num INT NOT NULL AUTO_INCREMENT,
+	writer_nickname varchar(255) NOT NULL,
 	title VARCHAR(120) NOT NULL,
 	content VARCHAR(3000) NOT NULL,
 	category VARCHAR(20),
@@ -8,10 +9,11 @@ CREATE TABLE board(
 	create_day TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	contect VARCHAR(100) NOT NULL,
 	tech_stack VARCHAR(255),
-	email VARCHAR(255) NOT NULL,
+	writer_email varchar(255) NOT NULL,
 	PRIMARY KEY (board_num)); 
 
 board_num : 게시글 번호
+writer_nickname : 작성자 닉네임
 title : 제목
 content : 게시글 내용
 category : 프로젝트, 대회, 스터디 등의 모집 이유

@@ -1,5 +1,6 @@
 from flask import request, redirect, url_for, Blueprint
 from views.utils.check_token import CHECK_TOKEN
+from ...utils.env_var import database_pwd
 import pymysql
 
 bp = Blueprint('delete_post', __name__, url_prefix='/')
@@ -8,7 +9,7 @@ bp = Blueprint('delete_post', __name__, url_prefix='/')
 def delete_post(delete_board_number):
     db = pymysql.connect(
         user='root',
-        passwd='0000',
+        passwd=database_pwd,
         host='localhost',
         port=3306,
         db='sebuung_db',
