@@ -1,8 +1,5 @@
 from flask import Flask
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
 
 def create_app() : 
     flask_secret_key = os.environ.get('FLASK_KEY')
