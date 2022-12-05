@@ -1,12 +1,9 @@
 from flask import Blueprint, request, session
 from views.utils.check_token import CHECK_TOKEN
-from dotenv import load_dotenv
 from views.utils.env_var import database_pwd, jwt_secret_key
 import pymysql
 import datetime
 import jwt
-
-load_dotenv('../env')
 
 bp = Blueprint('flask_own_user_get', __name__, url_prefix='/user/own_user')
 
@@ -43,7 +40,22 @@ def user() :
 
         cursor.execute('SELECT profile_image_name FROM users WHERE email=%s', decode_access_token_emil)
         profile_image_name = cursor.fetchone()['profile_image_name']
+
         register_db.close()
+
+        # get user posting
+        # board db connect
+        db = pymysql.connect(
+            host=   "localhost",
+            user=   "root", 
+            passwd= database_pwd, 
+            db=     "sebuung_db", 
+            charset="utf8"
+        )
+        cursor_board = db.cursor(pymysql.cursors.DictCursor)
+        cursor_board.execute('SELECT board_num, title, writer_nickname, create_day  FROM board WHERE writer_email=%s',decode_access_token_emil)
+        own_user_posting_dict = cursor_board.fetchall()
+        print(own_user_posting_dict[0])
 
         cache_cracker = datetime.datetime.utcnow()
         profile_image_link = f'https://flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/{profile_image_name}.jpg?{cache_cracker}'

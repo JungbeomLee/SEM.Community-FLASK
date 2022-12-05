@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, Blueprint
+from ...utils.env_var import database_pwd
 import pymysql
 
 bp = Blueprint('update_post', __name__, url_prefix='/')
@@ -7,7 +8,7 @@ bp = Blueprint('update_post', __name__, url_prefix='/')
 def update_post(update_board_number):
     db = pymysql.connect(
         user='root',
-        passwd='0000',
+        passwd=database_pwd,
         host='localhost',
         port=3306,
         db='sebuung_db',
