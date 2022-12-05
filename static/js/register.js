@@ -101,7 +101,9 @@ function postRegisterData(user_Data) {
             if (data['post_data_check'] == true) {
                 if (data['email_compare_check'] == true) {
                     alert('Already sign up email')
-                } else {
+                }else if(data['error'] == true) {
+                    alert('Signup error')
+                }else {
                     if (data['signUp_check'] == true) {
                         alert('Sign up successed')
                         location.href = '/'

@@ -44,15 +44,20 @@ def register_post() :
 
       return reps
     else :
-      signUp_check = True
-      reps['signUp_check'] = signUp_check
-      password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
+      try :
 
-      cursor.execute('INSERT INTO users (name, nickname, email, password, profile_text) VALUES (% s, %s, % s, % s, % s)', (user_name, user_nickname,useremail, password, user_profile))
-      register_db.commit()
-      register_db.close()
+        signUp_check = True
+        reps['signUp_check'] = signUp_check
+        password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
 
-      return reps
+        cursor.execute('INSERT INTO users (name, nickname, email, password, profile_text) VALUES (% s, %s, % s, % s, % s)', (user_name, user_nickname,useremail, password, user_profile))
+        register_db.commit()
+        register_db.close()
+
+        return reps
+      except :
+        reps['error'] = True
+        return reps
   else :    
     post_data_check = False
     reps['post_data_check'] = post_data_check

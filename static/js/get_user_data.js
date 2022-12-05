@@ -15,7 +15,7 @@ function arrangeGetData(data) {
     // 이름 GET
     document.getElementById('user_name').innerText = data['user_name'];
     // 닉네임 GET
-    document.getElementById('user_nickname').innerText = data['user_nickname'];
+    document.getElementById('usernickname').innerText = data['user_nickname'];
     // 자기소개 GET
     document.getElementById('user_profile').innerText = data['user_profile'];
     // 가입일자 GET
