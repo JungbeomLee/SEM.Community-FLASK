@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Room</title>
+</head>
+<body>
+    <h1>Create Room</h1>
+
+    <script type="text/javascript">
+        function checkNull() {
+            var roomName = document.roomName;
+
+            if(!roomName.room_name.value) {
+                alert("방 이름을 입력하세요!");
+                return false;
+            }
+        }
+    </script>
+
+    <form action="/create" method="post" name="roomName" onsubmit="checkNull();">
+        <input type="text" name="room_name" placeholder="Room_Name">
+        <input type="submit" value="Join_Room">
+    </form>
+</body>
+</html>

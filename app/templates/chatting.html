@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ room_name }}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            var socket = io();
+
+            socket.on('connect', function () {
+                socket.emit('join', {data: 'I\'m connected!', room_name: '{{ room_name }}'});
+            });
+
+            socket.on('my_response', function (msg) {
+                $('#log').append('<br>' + $('<div/>').text(msg.data).html());
+            });
+
+            $('form#emit').submit(function (event) {
+                if($('#emit_data').val() === ''){
+                    return false;
+                }
+                socket.emit('message', {data: $('#emit_data').val(), room_name: '{{ room_name }}'});
+                $('#emit_data').val("");
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Room Name : {{ room_name }}</h1>
+    <h2>Receive:</h2>
+    <div id="log"></div>
+
+    <script type="text/javascript">
+        var input = document.getElementById("emit_data");
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("sendmessage").click();
+            }
+        });
+    </script>
+
+    <form id="emit" name="message">
+        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+        <input type="submit" id="sendmessage" value="Send">
+    </form>
+    <form id="leave" method="POST" action='/'>
+        <input type="submit" value="Leave Room">
+    </form>
+</body>
+</html>

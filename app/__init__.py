@@ -1,21 +1,18 @@
 from flask import Flask
 from flask_socketio import SocketIO
 
-socket_io = SocketIO(logger=True, engineio_logger=True)
+socketio = SocketIO(engineio_logger=True, logger=True)
 
-
-def create_app(debug=False):
-    """Create an application."""
+def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret!'
 
-    socket_io.init_app(app)
-
-    from app.events import MyNamespace
-    socket_io.on_namespace(MyNamespace('/'))
+    socketio.init_app(app)
 
     from app.routes import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    
+    from app.events import socketio_init
+    socketio_init(socketio)
+
     return app
