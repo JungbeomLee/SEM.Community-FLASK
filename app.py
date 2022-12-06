@@ -11,8 +11,9 @@ def create_app() :
     from views.sign_up.post import flask_register_post, flask_register_nickname_check
     from views import flask_main
     from views.sign_up import flask_login, flask_logout
-    from views.user import flask_delete_account, flask_user_change_pwd, flask_other_user, flask_user_search
+    from views.user import flask_delete_account, flask_user_change_pwd, flask_user_search
     from views.user.own_user import flask_own_user, flask_own_user_upload_image
+    from views.user import flask_other_user
     from views.user.own_user.post import flask_own_user_password_post, flask_own_change_user_data_post, flask_own_user_image_post, flask_own_user_nickname_check
     from views.user.own_user.get import flask_own_user_get
     from views.board.operate_board import posting, delete_post, update_post

@@ -23,13 +23,76 @@
 <body>
     <div class="pic-holder pic-holder_unlogin" id="pic-holder">
         <!-- uploaded pic shown here -->
-        <img id="profilePic" class="pic" src="{{ other_user_data['profile_image_link'] }}" alt="user profile image" onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
+        <img id="profilePic" class="pic" src="{{ data['profile_image_link'] }}" alt="user profile image" onerror="this.src='https:flask-user-image-storage.s3.ap-northeast-2.amazonaws.com/images/normalprofileimage.jpg?'">
     </div>
-    <h1>USER {{ other_user_name }} PROFILE</h1>
-    <div>name : {{ other_user_data['user_name'] }}</div>
-    <div>nickname : {{ other_user_data['other_user_nickname'] }}</div>
-    <div>profile : {{ other_user_data['user_profile'] }}</div>
-    <div>created_at : {{ other_user_data['user_created_at'] }}</div>
+    <h1>USER {{ data['other_user_nickname'] }} PROFILE</h1>
+    <div>name : {{ data['user_name'] }}</div>
+    <div>nickname : {{ data['other_user_nickname'] }}</div>
+    <div>profile : {{ data['user_profile'] }}</div>
+    <div>created_at : {{ data['user_created_at'] }}</div>
+
+    {% if (data['other_user_posting_data']|length) != 0 %}
+    <table id="showpost_list_table">
+        <thead>
+            <tr>
+                <th>board_num</th>
+                <th>title</th>
+                <th>writer_nickname</th>
+                <th>create_day</th>
+                <th>tech_stack</th>
+            </tr>
+        </thead>
+        <tbody id="user_posting_data_table">
+            {% for i in range(data['other_user_posting_data']|length) %}
+            <tr id="user_posting_data_table" onclick="goPostedBoard();">
+                <td id="board_num">{{data["other_user_posting_data"][i]["board_num"]}}</td>
+                <td id="board_title">{{data["other_user_posting_data"][i]["title"]}}</td>
+                <td id="writer_nickname">{{data["other_user_posting_data"][i]["writer_nickname"]}}</td>
+                <td id="create_day">{{data["other_user_posting_data"][i]["create_day"]}}</td>
+                <td id="tech_stack">{{data["other_user_posting_data"][i]["tech_stack"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    
 </body>
+<style>
+    table {
+      border:1px solid;
+      text-align:center;
+    }
+
+    table thead tr {
+      background:gray;
+      color:white;
+    }
+
+    table tbody tr:hover {
+      background-color: lightgray;
+      cursor:pointer;
+    }
+
+    td {
+      border:1px solid
+    }
+
+    th {
+      border:1px solid
+    }
+
+    p {
+      margin:auto;
+      margin-top:30px;
+      text-align:center;
+    }
+</style>
+<script>
+    function goPostedBoard(){
+        boardNum = document.getElementById('board_num').innerText
+        location.href = `/post/${boardNum}` 
+    }
+</script>
+
 
 </html>
