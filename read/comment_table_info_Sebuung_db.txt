@@ -1,0 +1,16 @@
+댓글 DB
+
+CREATE TABLE comment(
+    board_num INT NOT NULL,
+    nickname VARCHAR(255) NOT NULL,
+    commentIndex INT NOT NULL AUTO_INCREMENT,
+    comment VARCHAR(1000) NOT NULL,
+    CT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (commentIndex)
+)
+
+board_num : board 테이블의 board_num과 같음
+nickname : 닉네임
+commentIndex = 댓글 인덱스 번호 (대댓글 연결용)
+comment : 댓글 내용
+CT : Create_time 써진 시간

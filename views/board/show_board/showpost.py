@@ -1,9 +1,9 @@
 from flask import render_template, request, Blueprint
 import pymysql
 
-bp = Blueprint('posting', __name__, url_prefix='/')
+bp = Blueprint('posting', __name__, url_prefix='/post')
 
-@bp.route('/post/<select_board_number>', methods=['GET', 'POST'])
+@bp.route('/<select_board_number>', methods=['GET', 'POST'])
 def showpost(select_board_number):
     db = pymysql.connect(
         user='root',
@@ -13,6 +13,7 @@ def showpost(select_board_number):
         db='sebuung_db',
         charset='utf8'
     )
+    
     cursor = db.cursor()
 
     if request.method == "GET": 

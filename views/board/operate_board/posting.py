@@ -30,7 +30,7 @@ def posting():
             tech_stack = request.form['tech_stack']
             email = session['user_email']
             cursor.execute(
-                "INSERT INTO board(title,content,category,max_team,start_day,contect,tech_stack, email) VALUES('{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}');"
+                "INSERT INTO board(title,content,category,max_team,start_day,contect,tech_stack,email) VALUES('{0}','{1}','{2}',{3},'{4}','{5}','{6}','{7}');"
                 .format(title,content,category,max_team,start_day,contect,tech_stack,email))    
             db.commit()
             db.close()

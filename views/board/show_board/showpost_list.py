@@ -15,7 +15,7 @@ def showpost_list():
         charset='utf8'
     )
     cursor = db.cursor()
-
+     
     cursor.execute("SELECT board_num, title, category, start_day, tech_stack FROM board")
     post_list = cursor.fetchall()
     db.close()
