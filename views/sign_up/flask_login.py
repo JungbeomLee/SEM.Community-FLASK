@@ -42,7 +42,7 @@ def login_post() :
             # set session
             session['user_email'] = useremail
 
-            # create access/refresh token
+            # create access/refresh token 
             access_token = jwt.encode({
               'user_email' : useremail,
               'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=jwt_access_token_expires)

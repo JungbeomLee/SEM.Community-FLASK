@@ -33,7 +33,7 @@
         <div id="user_name_div">이름 : <a id="user_name"></a></div>
         <div id="form_input_change_user_data_div">
             <div id="before_check_password_user_data">
-                <div id="user_nickname_div">닉네임 : <a id="user_nickname"></a></div>
+                <div id="user_nickname_div">닉네임 : <a id="usernickname"></a></div>
                 <div id="user_profile_div">자기소개 : <a id="user_profile"></a></div>
             </div>
 
@@ -61,7 +61,43 @@
             </div>
             <button type="submit" id="password_submit" class="btn btn-primary">확인</button>
         </form>
+
+        <table id="showpost_list_table">
+            <tbody id="user_posting_data_table">
+            </tbody>
+        </table>
     </div>
+    <!-- 임시 style -->
+    <style>
+        table {
+          border:1px solid;
+          text-align:center;
+        }
+ 
+        table thead tr {
+          background:gray;
+          color:white;
+        }
+
+        table tbody tr:hover {
+          background-color: lightgray;
+          cursor:pointer;
+        }
+
+        td {
+          border:1px solid
+        }
+
+        th {
+          border:1px solid
+        }
+
+        p {
+          margin:auto;
+          margin-top:30px;
+          text-align:center;
+        }
+    </style>
 
 </body>
 <script src="/static/js/get_user_image.js" type="module"></script>

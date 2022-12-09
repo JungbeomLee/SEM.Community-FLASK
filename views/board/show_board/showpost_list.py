@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, request
+from ...utils.env_var import database_pwd
 import pymysql
 
 bp = Blueprint('showpost_list', __name__, url_prefix='/')
@@ -9,7 +10,7 @@ def showpost_list():
     db = pymysql.connect(
         host=   "localhost",
         user=   "root", 
-        passwd='0000',
+        passwd=database_pwd,
         port=3306,
         db='sebuung_db',
         charset='utf8'
@@ -26,7 +27,7 @@ def showpost_list():
 def search(search_word):
     db = pymysql.connect(
         user='root',
-        passwd='0000',
+        passwd=database_pwd,
         host='localhost',
         port=3306,
         db='sebuung_db',
